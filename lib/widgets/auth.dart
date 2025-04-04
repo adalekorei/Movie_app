@@ -38,15 +38,37 @@ class HeaderWidget extends StatelessWidget {
             Text('Login to your account', style: TextStyle(fontSize: 22)),
             SizedBox(height: 10),
             Text(
-              'In order to use the editing and rating capabilities of Movie App, as well as get personal recommendations you will need to login to your account. if you do not have an account, registering for and account is free and simple. Click here to get started.',
+              'In order to use the editing and rating capabilities of Movie App, as well as get personal recommendations you will need to login to your account. if you do not have an account, registering for and account is free and simple. Click below to get started.',
               style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 5),
+            TextButton(
+              style: ButtonStyle(
+                foregroundColor: WidgetStatePropertyAll(
+                  const Color.fromARGB(186, 30, 119, 51),
+                ),
+                textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 16)),
+              ),
+              onPressed: () {},
+              child: Text('Create an account'),
             ),
             SizedBox(height: 10),
             Text(
-              "If you signed up but didn't get your verification email, click here to have it resent.",
+              "If you signed up but didn't get your verification email, click below to have it resent.",
               style: TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 45),
+            SizedBox(height: 5),
+            TextButton(
+              style: ButtonStyle(
+                foregroundColor: WidgetStatePropertyAll(
+                  const Color.fromARGB(186, 30, 119, 51),
+                ),
+                textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 16)),
+              ),
+              onPressed: () {},
+              child: Text('Verify your email'),
+            ),
+            SizedBox(height: 25),
             FormWidget(),
           ],
         ),
@@ -65,16 +87,88 @@ class FormWidget extends StatefulWidget {
 }
 
 class _FormWidgetState extends State<FormWidget> {
+  final _loginTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
+  String? errorText = null;
+
+  void _auth() {
+    final login = _loginTextController.text;
+    final password = _passwordTextController.text;
+
+    if (login == 'qwerty' && password == 'qwerty') {
+      errorText = null;
+      print('opening');
+    } else {
+      errorText = 'Login or password is not correct!';
+    }
+    setState(() {});
+  }
+
+  void _resetPassword() {
+    print('Reset password');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (errorText != null)
+          Text('$errorText', style: TextStyle(fontSize: 16, color: Colors.red)),
+          SizedBox(height: 10),
         Text('Username', style: TextStyle(fontSize: 16)),
-        TextField(decoration: InputDecoration(contentPadding: EdgeInsets.symmetric(horizontal: 5,), border: OutlineInputBorder()), ),
+        TextField(
+          controller: _loginTextController,
+          decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: const Color.fromARGB(90, 82, 175, 102),
+              ),
+            ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 5),
+            border: OutlineInputBorder(),
+          ),
+        ),
         SizedBox(height: 15),
         Text('Password', style: TextStyle(fontSize: 16)),
-        TextField(decoration: InputDecoration(contentPadding: EdgeInsets.symmetric(horizontal: 5,), border: OutlineInputBorder()),)
+        TextField(
+          controller: _passwordTextController,
+          obscureText: true,
+          decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: const Color.fromARGB(90, 82, 175, 102),
+              ),
+            ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 5),
+            border: OutlineInputBorder(),
+          ),
+        ),
+        SizedBox(height: 25),
+        Row(
+          children: [
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(
+                  const Color.fromARGB(90, 82, 175, 102),
+                ),
+                foregroundColor: WidgetStatePropertyAll(Colors.black),
+                textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 16)),
+              ),
+              onPressed: _auth,
+              child: const Text('Login'),
+            ),
+            SizedBox(width: 15),
+            TextButton(
+              style: ButtonStyle(
+                foregroundColor: WidgetStatePropertyAll(Colors.black),
+                textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 16)),
+              ),
+              onPressed: _resetPassword,
+              child: Text('Reset password'),
+            ),
+          ],
+        ),
       ],
     );
   }
