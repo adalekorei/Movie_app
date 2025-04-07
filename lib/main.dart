@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/theme/app_colors.dart';
 import 'package:movie_app/widgets/auth.dart';
+import 'package:movie_app/widgets/main_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +13,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        appBarTheme: AppBarTheme(backgroundColor: AppColors.mainGreen),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: AppColors.mainGreen,
+          selectedItemColor: Colors.white, 
+          unselectedItemColor: const Color.fromARGB(255, 49, 82, 99)
+        ),
       ),
-      home: Auth(),
+      routes: {
+        '/auth': (context) => Auth(),
+        '/main screen': (context) => MainScreen(),
+      },
+      initialRoute: '/auth',
     );
   }
 }

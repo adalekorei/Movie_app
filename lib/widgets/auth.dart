@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/theme/app_colors.dart';
+import 'package:movie_app/widgets/main_screen.dart';
 
 class Auth extends StatefulWidget {
   const Auth({super.key});
@@ -15,7 +17,7 @@ class _AuthState extends State<Auth> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,
-        backgroundColor: const Color.fromARGB(90, 82, 175, 102),
+        backgroundColor: AppColors.mainGreen,
         centerTitle: true,
         title: const Text('Movie App'),
       ),
@@ -45,7 +47,7 @@ class HeaderWidget extends StatelessWidget {
             TextButton(
               style: ButtonStyle(
                 foregroundColor: WidgetStatePropertyAll(
-                  const Color.fromARGB(186, 30, 119, 51),
+                  AppColors.mainGreen,
                 ),
                 textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 16)),
               ),
@@ -61,7 +63,7 @@ class HeaderWidget extends StatelessWidget {
             TextButton(
               style: ButtonStyle(
                 foregroundColor: WidgetStatePropertyAll(
-                  const Color.fromARGB(186, 30, 119, 51),
+                  AppColors.mainGreen,
                 ),
                 textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 16)),
               ),
@@ -87,8 +89,8 @@ class FormWidget extends StatefulWidget {
 }
 
 class _FormWidgetState extends State<FormWidget> {
-  final _loginTextController = TextEditingController();
-  final _passwordTextController = TextEditingController();
+  final _loginTextController = TextEditingController(text: 'qwerty');
+  final _passwordTextController = TextEditingController(text: 'qwerty');
   String? errorText = null;
 
   void _auth() {
@@ -97,7 +99,9 @@ class _FormWidgetState extends State<FormWidget> {
 
     if (login == 'qwerty' && password == 'qwerty') {
       errorText = null;
-      print('opening');
+
+      Navigator.of(context).pushReplacementNamed('/main screen');
+
     } else {
       errorText = 'Login or password is not correct!';
     }
@@ -115,14 +119,14 @@ class _FormWidgetState extends State<FormWidget> {
       children: [
         if (errorText != null)
           Text('$errorText', style: TextStyle(fontSize: 16, color: Colors.red)),
-          SizedBox(height: 10),
+        SizedBox(height: 10),
         Text('Username', style: TextStyle(fontSize: 16)),
         TextField(
           controller: _loginTextController,
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: const Color.fromARGB(90, 82, 175, 102),
+                color: AppColors.mainGreen,
               ),
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 5),
@@ -137,7 +141,7 @@ class _FormWidgetState extends State<FormWidget> {
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: const Color.fromARGB(90, 82, 175, 102),
+                color: AppColors.mainGreen,
               ),
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 5),
@@ -150,7 +154,7 @@ class _FormWidgetState extends State<FormWidget> {
             ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: WidgetStatePropertyAll(
-                  const Color.fromARGB(90, 82, 175, 102),
+                  AppColors.mainGreen,
                 ),
                 foregroundColor: WidgetStatePropertyAll(Colors.black),
                 textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 16)),
