@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/theme/app_colors.dart';
-import 'package:movie_app/widgets/main_screen.dart';
 
 class Auth extends StatefulWidget {
   const Auth({super.key});

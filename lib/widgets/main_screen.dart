@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/theme/app_colors.dart';
+import 'package:movie_app/widgets/movie_list.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -14,8 +15,8 @@ class _MainScreenState extends State<MainScreen> {
   var _selectedTab = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     Text('News'),
-    Text('Movies'),
-    Text('Serials')
+    MovieList(),
+    Text('Serials'),
   ];
 
   void onSelectTab(int index) {
