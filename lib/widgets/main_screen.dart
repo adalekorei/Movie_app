@@ -28,9 +28,9 @@ class _MainScreenState extends State<MainScreen> {
         toolbarHeight: 40,
         backgroundColor: AppColors.mainGreen,
         centerTitle: true,
-        title: const Text('Movie App'),
+        title: const Text('Movie App', style: TextStyle(fontWeight: FontWeight.bold),),
       ),
-      body: IndexedStack(
+      body: IndexedStack( 
         index: _selectedTab,
         children: [Text('News'), MovieList(), Text('Serials')],
       ),
