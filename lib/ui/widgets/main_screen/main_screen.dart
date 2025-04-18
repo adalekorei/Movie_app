@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/theme/app_colors.dart';
-import 'package:movie_app/widgets/movie_list.dart';
+import 'package:movie_app/ui/theme/app_colors.dart';
+import 'package:movie_app/ui/widgets/movie_list/movie_list.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

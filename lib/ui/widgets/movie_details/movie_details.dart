@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/theme/app_colors.dart';
-import 'package:movie_app/widgets/movie_details/movie_info_page.dart';
-import 'package:movie_app/widgets/movie_details/movie_screen_cast.dart';
+import 'package:movie_app/ui/theme/app_colors.dart';
+import 'package:movie_app/ui/widgets/movie_details/movie_info_page.dart';
+import 'package:movie_app/ui/widgets/movie_details/movie_screen_cast.dart';
 
 class MovieDetails extends StatefulWidget {
   final int movieId;

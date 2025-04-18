@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/widgets/elements/custom_paint.dart';
+import 'package:movie_app/ui/widgets/elements/custom_paint.dart';
 
 class MovieInfoPage extends StatelessWidget {
   const MovieInfoPage({super.key});
@@ -25,7 +25,7 @@ class MovieInfoPage extends StatelessWidget {
 }
 
 class _TopPoster extends StatelessWidget {
-  const _TopPoster({super.key});
+  const _TopPoster();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class _TopPoster extends StatelessWidget {
 }
 
 class _MovieTitle extends StatelessWidget {
-  const _MovieTitle({super.key});
+  const _MovieTitle();
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class _MovieTitle extends StatelessWidget {
 }
 
 class _CirclePercentage extends StatelessWidget {
-  const _CirclePercentage({super.key});
+  const _CirclePercentage();
 
   @override
   Widget build(BuildContext context) {
