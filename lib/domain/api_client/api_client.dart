@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:movie_app/domain/entity/popular_movies_response.dart';
+
 enum ApiClientExceptionType { Network, Auth, Other }
 
 class ApiClientException implements Exception {
@@ -13,6 +15,8 @@ class ApiClient {
   static const _host = 'https://api.themoviedb.org/3';
   static const _imageUrl = 'https://image.tmdb.org/t/p/w500';
   static const _apiKey = 'd4c84e3421bd8f3dbfde9bb34c421c1d';
+
+  static String imageUrl(String path) => _imageUrl + path;
 
   Future<String> auth({
     required String username,
@@ -95,6 +99,18 @@ class ApiClient {
     };
     final result = _get('/authentication/token/new', parser, <String, dynamic>{
       'api_key': _apiKey,
+    });
+    return result;
+  }
+
+   Future<PopularMoviesResponse> popularMovies(int page, String local) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularMoviesResponse.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get('/movie/popular', parser, <String, dynamic>{
+      'api_key': _apiKey, 'language': local, 'page': page.toString(),
     });
     return result;
   }
