@@ -34,7 +34,7 @@ class AuthModel extends ChangeNotifier {
     final password = passwordTextController.text;
 
     if (login.isEmpty || password.isEmpty) {
-      _errorMessage = 'Fill login and password';
+      _errorMessage = 'Fill login and password!';
       notifyListeners();
       return;
     }
@@ -44,12 +44,20 @@ class AuthModel extends ChangeNotifier {
     notifyListeners();
     String? sessionId;
     try {
-       sessionId = await _apiClient.auth(
-        username: login,
-        password: password,
-      );
-    } catch (e) {
-      _errorMessage = 'Incorrect login or password!';
+      sessionId = await _apiClient.auth(username: login, password: password);
+    } on ApiClientException catch (e) {
+      switch (e.type) {
+        case ApiClientExceptionType.Network:
+          _errorMessage =
+              'Server is not available, check your internet connection!';
+          break;
+        case ApiClientExceptionType.Auth:
+          _errorMessage = 'Incorrect login or password!';
+          break;
+        case ApiClientExceptionType.Other:
+          _errorMessage = 'Error happens, please try again!';
+          break;
+      }
     }
 
     _isAuthProgress = false;
@@ -58,7 +66,7 @@ class AuthModel extends ChangeNotifier {
       return;
     }
     if (sessionId == null) {
-      _errorMessage = 'Unidentified error, please repeat your attempt';
+      _errorMessage = 'Unidentified error, please repeat your attempt!';
       notifyListeners();
       return;
     }
