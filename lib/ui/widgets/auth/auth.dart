@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/theme/app_colors.dart';
 import 'package:movie_app/ui/widgets/auth/auth_model.dart';
+import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 
 class Auth extends StatefulWidget {
   const Auth({super.key});
@@ -80,7 +81,7 @@ class FormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = AuthProvider.watch(context)?.model;
+    final model = NotifierProvider.watch<AuthModel>(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,7 +138,7 @@ class AuthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = AuthProvider.watch(context)?.model;
+    final model = NotifierProvider.watch<AuthModel>(context);
     final onPressed =
         model?.canAuth == true ? () => model?.auth(context) : null;
     final child =
@@ -165,11 +166,11 @@ class AuthButton extends StatelessWidget {
 }
 
 class _ErrorMessage extends StatelessWidget {
-  const _ErrorMessage({super.key});
+  const _ErrorMessage();
 
   @override
   Widget build(BuildContext context) {
-    final errorMessage = AuthProvider.watch(context)?.model.errorMessage;
+    final errorMessage = NotifierProvider.watch<AuthModel>(context)?.errorMessage;
     if (errorMessage == null) return const SizedBox.shrink();
 
     return Padding(

@@ -75,22 +75,3 @@ class AuthModel extends ChangeNotifier {
     super.dispose();
   }
 }
-
-class AuthProvider extends InheritedNotifier {
-  final AuthModel model;
-
-  const AuthProvider({Key? key, required Widget child, required this.model})
-    : super(key: key, child: child, notifier: model);
-
-  get widget => null;
-
-  static AuthProvider? watch(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<AuthProvider>();
-  }
-
-  static AuthProvider? read(BuildContext context) {
-    final widget =
-        context.dependOnInheritedWidgetOfExactType<AuthProvider>()?.widget;
-    return widget is AuthProvider ? widget : null;
-  }
-}

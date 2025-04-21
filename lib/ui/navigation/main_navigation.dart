@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/widgets/auth/auth.dart';
 import 'package:movie_app/ui/widgets/auth/auth_model.dart';
+import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 import 'package:movie_app/ui/widgets/main_screen/main_screen.dart';
+import 'package:movie_app/ui/widgets/main_screen/main_screen_model.dart';
 import 'package:movie_app/ui/widgets/movie_details/movie_details.dart';
 
 abstract class MainNavigationRoutes {
@@ -14,8 +16,8 @@ class MainNavigation {
   String initialRoute(bool isAuth) =>
       isAuth ? MainNavigationRoutes.mainScreen : MainNavigationRoutes.auth;
   final routes = <String, Widget Function(BuildContext)>{
-    'auth': (context) => AuthProvider(model: AuthModel(), child: Auth()),
-    '/': (context) => MainScreen(),
+    'auth': (context) => NotifierProvider(model: AuthModel(), child: Auth()),
+    '/': (context) => NotifierProvider(model: MainScreenModel(), child: MainScreen(),),
   };
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
