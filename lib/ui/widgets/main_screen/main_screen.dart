@@ -48,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
         children: [
           const Text('News'),
           NotifierProvider(model: movieListModel, child: const MovieList()),
-          const Text('Serials'),
+          const Text('TV Shows'),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -56,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'News'),
           BottomNavigationBarItem(icon: Icon(Icons.movie), label: 'Movies'),
-          BottomNavigationBarItem(icon: Icon(Icons.tv), label: 'Serials'),
+          BottomNavigationBarItem(icon: Icon(Icons.tv), label: 'TV Shows'),
         ],
         onTap: onSelectTab,
       ),

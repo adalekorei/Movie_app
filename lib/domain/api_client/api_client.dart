@@ -103,14 +103,36 @@ class ApiClient {
     return result;
   }
 
-   Future<PopularMoviesResponse> popularMovies(int page, String local) async {
+  Future<PopularMoviesResponse> popularMovies(int page, String local) async {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularMoviesResponse.fromJson(jsonMap);
       return response;
     };
     final result = _get('/movie/popular', parser, <String, dynamic>{
-      'api_key': _apiKey, 'language': local, 'page': page.toString(),
+      'api_key': _apiKey,
+      'language': local,
+      'page': page.toString(),
+    });
+    return result;
+  }
+
+  Future<PopularMoviesResponse> searchMovie(
+    int page,
+    String local,
+    String query,
+  ) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularMoviesResponse.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get('/search/movie', parser, <String, dynamic>{
+      'api_key': _apiKey,
+      'language': local,
+      'page': page.toString(),
+      'query': query,
+      'include_adult': true.toString(),
     });
     return result;
   }
