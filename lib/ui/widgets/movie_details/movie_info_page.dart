@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:movie_app/domain/api_client/api_client.dart';
 import 'package:movie_app/ui/widgets/elements/custom_paint.dart';
+import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
+import 'package:movie_app/ui/widgets/movie_details/movie_details_model.dart';
 
 class MovieInfoPage extends StatelessWidget {
   const MovieInfoPage({super.key});
@@ -29,16 +33,28 @@ class _TopPoster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image(image: AssetImage('assets/images/mickey1.jpg')),
-        Positioned(
-          top: 20,
-          left: 20,
-          bottom: 20,
-          child: Image(image: AssetImage('assets/images/mickey2.jpg')),
-        ),
-      ],
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    final backdropPath = model?.movieDetails?.backdropPath;
+    final posterPath = model?.movieDetails?.posterPath;
+
+    return AspectRatio(
+      aspectRatio: 390 / 219,
+      child: Stack(
+        children: [
+          backdropPath != null
+              ? Image.network(ApiClient.imageUrl(backdropPath))
+              : SizedBox.shrink(),
+          Positioned(
+            top: 20,
+            left: 20,
+            bottom: 20,
+            child:
+                posterPath != null
+                    ? Image.network(ApiClient.imageUrl(posterPath))
+                    : SizedBox.shrink(),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -48,18 +64,21 @@ class _MovieTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    var year = model?.movieDetails?.releaseDate?.year.toString();
+    year = year != null ? ' ($year)' : '';
     return RichText(
       maxLines: 3,
       textAlign: TextAlign.center,
       text: TextSpan(
         children: [
           TextSpan(
-            text: 'Mickey 17',
+            text: model?.movieDetails?.title ?? '',
             style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
           ),
           TextSpan(
-            text: ' (2025)',
-            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+            text: year,
+            style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
           ),
         ],
       ),
@@ -72,6 +91,9 @@ class _CirclePercentage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final movieDetails =
+        NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
+    var voteAverage = movieDetails?.voteAverage ?? 0;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -83,23 +105,31 @@ class _CirclePercentage extends StatelessWidget {
                 width: 45,
                 height: 45,
                 child: UserScore(
-                  percent: 6.4,
-                  fillColors: const Color.fromARGB(255, 25, 41, 31),
+                  percent: voteAverage,
+                  fillColors: const Color.fromARGB(113, 255, 255, 255),
                   lineColor: const Color.fromARGB(206, 22, 207, 53),
-                  freeColor: const Color.fromARGB(255, 252, 85, 43),
+                  freeColor: const Color.fromARGB(255, 0, 0, 0),
                   lineWidth: 2.5,
-                  child: Text('64', style: TextStyle(color: Colors.white,),),
+                  child: Text(
+                    voteAverage.toStringAsFixed(1),
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
-              SizedBox(width: 10,),
-              Text(' User Score', style: TextStyle(color: Colors.white,)),
+              SizedBox(width: 10),
+              Text(' User Score', style: TextStyle(color: Colors.white)),
             ],
           ),
         ),
         Container(color: Colors.black, width: 1, height: 15),
         TextButton(
           onPressed: () {},
-          child: Row(children: [Icon(Icons.play_arrow, color: Colors.white,), Text('Play Trailer', style: TextStyle(color: Colors.white,))]),
+          child: Row(
+            children: [
+              Icon(Icons.play_arrow, color: Colors.white),
+              Text('Play Trailer', style: TextStyle(color: Colors.white)),
+            ],
+          ),
         ),
       ],
     );
@@ -108,13 +138,43 @@ class _CirclePercentage extends StatelessWidget {
 
 class Summary extends StatelessWidget {
   const Summary({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+
+    if (model == null) return SizedBox.shrink();
+    var text = <String>[];
+    final releaseDate = model.movieDetails?.releaseDate;
+    if (releaseDate != null) {
+      text.add(model.stringFromDate(releaseDate));
+    }
+    final country = model.movieDetails?.productionCountries;
+    if (country != null && country.isNotEmpty) {
+      text.add('(${country.first.iso})');
+    }
+
+final runtime = model.movieDetails?.runtime ?? 0;
+final duration = Duration(minutes: runtime);
+final hours = duration.inHours;
+final minutes = duration.inMinutes.remainder(60);
+  text.add('${hours}h ${minutes}m');
+
+final genres = model.movieDetails?.genres;
+if(genres != null && genres.isNotEmpty) {
+  var genresName = <String>[];
+  for (var genr in genres) {
+    genresName.add(genr.name);
+  }
+  text.add(genresName.join(', '));
+}
+
     return Text(
       maxLines: 3,
       textAlign: TextAlign.center,
-      'R, 09/04/2025, (US) | 1h 58m, Action, Adventure, Thriller',
-      style: TextStyle(
+      text.join(' '),
+      // 'R, 09/04/2025, (US) | 1h 58m, Action, Adventure, Thriller',
+      style: const TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w400,
         fontSize: 16,
@@ -128,12 +188,13 @@ class Overview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Overview',
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w800,
             fontSize: 20,
             color: Colors.white,
@@ -141,8 +202,8 @@ class Overview extends StatelessWidget {
         ),
         Text(
           maxLines: 3,
-          'The film stars Robert Pattinson in the title role, alongside Naomi Ackie. Set in the year 2054, the plot follows a man who joins a space colony as an "Expendable".',
-          style: TextStyle(color: Colors.white, fontSize: 14),
+          model?.movieDetails?.overview ?? '',
+          style: const TextStyle(color: Colors.white, fontSize: 16),
         ),
       ],
     );

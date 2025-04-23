@@ -18,7 +18,7 @@ class _AuthState extends State<Auth> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,
-        backgroundColor: AppColors.mainGreen,
+        backgroundColor: AppColors.mainColor,
         centerTitle: true,
         title: const Text('Movie App'),
       ),
@@ -47,7 +47,7 @@ class HeaderWidget extends StatelessWidget {
             SizedBox(height: 5),
             TextButton(
               style: ButtonStyle(
-                foregroundColor: WidgetStatePropertyAll(AppColors.mainGreen),
+                foregroundColor: WidgetStatePropertyAll(AppColors.mainColor),
                 textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 16)),
               ),
               onPressed: () {},
@@ -61,7 +61,7 @@ class HeaderWidget extends StatelessWidget {
             SizedBox(height: 5),
             TextButton(
               style: ButtonStyle(
-                foregroundColor: WidgetStatePropertyAll(AppColors.mainGreen),
+                foregroundColor: WidgetStatePropertyAll(AppColors.mainColor),
                 textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 16)),
               ),
               onPressed: () {},
@@ -92,7 +92,7 @@ class FormWidget extends StatelessWidget {
           controller: model?.loginTextController,
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.mainGreen),
+              borderSide: BorderSide(color: AppColors.mainColor),
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 5),
             border: OutlineInputBorder(),
@@ -105,7 +105,7 @@ class FormWidget extends StatelessWidget {
           obscureText: true,
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.mainGreen),
+              borderSide: BorderSide(color: AppColors.mainColor),
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 5),
             border: OutlineInputBorder(),
@@ -156,7 +156,7 @@ class AuthButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(AppColors.mainGreen),
+        backgroundColor: WidgetStatePropertyAll(AppColors.mainColor),
         foregroundColor: WidgetStatePropertyAll(Colors.black),
         textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 16)),
       ),

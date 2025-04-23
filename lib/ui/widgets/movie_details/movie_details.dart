@@ -27,13 +27,13 @@ class _MovieDetailsState extends State<MovieDetails> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,
-        backgroundColor: AppColors.mainGreen,
+        backgroundColor: AppColors.mainColor,
         centerTitle: true,
         title: Title(),
       ),
-      body: ColoredBox(
-        color: const Color.fromARGB(197, 79, 141, 122),
-        child: ListView(children: [MovieInfoPage(), MovieScreenCast()]),
+      body: const ColoredBox(
+        color: Color.fromARGB(255, 0, 35, 43),
+        child: _Body(),
       ),
     );
   }
@@ -45,9 +45,23 @@ class Title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    return Text(model?.movieDetails?.title ?? 'Loading..',
+    return Text(
+      model?.movieDetails?.title ?? 'Loading..',
       style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
     );
   }
 }
 
+class _Body extends StatelessWidget {
+  const _Body();
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    final movieDetails = model?.movieDetails;
+    if(movieDetails == null) {
+      return Center(child: const CircularProgressIndicator());
+    }
+    return ListView(children: [MovieInfoPage(), MovieScreenCast()]);
+  }
+}

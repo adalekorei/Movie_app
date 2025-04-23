@@ -36,11 +36,11 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,
-        backgroundColor: AppColors.mainGreen,
+        backgroundColor: AppColors.mainColor,
         centerTitle: true,
         title: const Text(
           'Movie App',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
       body: IndexedStack(
@@ -59,9 +59,15 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: _selectedTab,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'News'),
-          BottomNavigationBarItem(icon: Icon(Icons.movie), label: 'Movies'),
+          BottomNavigationBarItem(
+            backgroundColor: Colors.white,
+            icon: Icon(Icons.movie),
+            label: 'Movies',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.tv), label: 'TV Shows'),
         ],
+        selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+        unselectedItemColor: const Color.fromARGB(255, 148, 148, 148),
         onTap: onSelectTab,
       ),
     );
