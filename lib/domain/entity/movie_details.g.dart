@@ -48,6 +48,9 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
   video: json['video'] as bool,
   voteAverage: (json['vote_average'] as num).toDouble(),
   voteCount: (json['vote_count'] as num).toInt(),
+  credits: MovieDetailsCredits.fromJson(
+    json['credits'] as Map<String, dynamic>,
+  ),
 );
 
 Map<String, dynamic> _$MovieDetailsToJson(
@@ -79,6 +82,7 @@ Map<String, dynamic> _$MovieDetailsToJson(
   'video': instance.video,
   'vote_average': instance.voteAverage,
   'vote_count': instance.voteCount,
+  'credits': instance.credits.toJson(),
 };
 
 BelongsToCollection _$BelongsToCollectionFromJson(Map<String, dynamic> json) =>

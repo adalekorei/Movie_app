@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_app/domain/api_client/api_client.dart';
+import 'package:movie_app/domain/entity/movie_details_credits.dart';
 import 'package:movie_app/ui/widgets/elements/custom_paint.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 import 'package:movie_app/ui/widgets/movie_details/movie_details_model.dart';
@@ -22,7 +23,6 @@ class MovieInfoPage extends StatelessWidget {
         Padding(padding: const EdgeInsets.all(10), child: Overview()),
         SizedBox(height: 20),
         Padding(padding: const EdgeInsets.all(10), child: MediaNames()),
-        Padding(padding: const EdgeInsets.all(10), child: MediaNames2()),
       ],
     );
   }
@@ -154,20 +154,20 @@ class Summary extends StatelessWidget {
       text.add('(${country.first.iso})');
     }
 
-final runtime = model.movieDetails?.runtime ?? 0;
-final duration = Duration(minutes: runtime);
-final hours = duration.inHours;
-final minutes = duration.inMinutes.remainder(60);
-  text.add('${hours}h ${minutes}m');
+    final runtime = model.movieDetails?.runtime ?? 0;
+    final duration = Duration(minutes: runtime);
+    final hours = duration.inHours;
+    final minutes = duration.inMinutes.remainder(60);
+    text.add('${hours}h ${minutes}m');
 
-final genres = model.movieDetails?.genres;
-if(genres != null && genres.isNotEmpty) {
-  var genresName = <String>[];
-  for (var genr in genres) {
-    genresName.add(genr.name);
-  }
-  text.add(genresName.join(', '));
-}
+    final genres = model.movieDetails?.genres;
+    if (genres != null && genres.isNotEmpty) {
+      var genresName = <String>[];
+      for (var genr in genres) {
+        genresName.add(genr.name);
+      }
+      text.add(genresName.join(', '));
+    }
 
     return Text(
       maxLines: 3,
@@ -215,73 +215,59 @@ class MediaNames extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Column(
-          children: [
-            Text(
-              ' Robert Pattinson ',
-              style: TextStyle(color: Colors.white, fontSize: 14),
-            ),
-            Text(
-              ' Director ',
-              style: TextStyle(color: Colors.white, fontSize: 14),
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            Text(
-              ' Pattinson Robert ',
-              style: TextStyle(color: Colors.white, fontSize: 14),
-            ),
-            Text(
-              ' Novel ',
-              style: TextStyle(color: Colors.white, fontSize: 14),
-            ),
-          ],
-        ),
-      ],
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    var crew = model?.movieDetails?.credits.crew;
+    if (crew == null || crew.isEmpty) return const SizedBox.shrink();
+    crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
+
+    var crewChunks = <List<Crew>>[];
+    for (var i = 0; i < crew.length; i += 2) {
+      crewChunks.add(
+        crew.sublist(i, i + 2 > crew.length ? crew.length : i + 2),
+      );
+    }
+
+    return Column(
+      children:
+          crewChunks
+              .map(
+                (chunk) => Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: MediaNamesRow(crew: chunk),
+                ),
+              )
+              .toList(),
     );
   }
 }
 
-class MediaNames2 extends StatelessWidget {
-  const MediaNames2({super.key});
+class MediaNamesRow extends StatelessWidget {
+  final List<Crew> crew;
+  const MediaNamesRow({super.key, required this.crew});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Column(
-          children: [
-            Text(
-              ' Naomi Ackie ',
-              style: TextStyle(color: Colors.white, fontSize: 14),
-            ),
-            Text(
-              ' Screenplay ',
-              style: TextStyle(color: Colors.white, fontSize: 14),
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            Text(
-              ' Mark Ruffalo ',
-              style: TextStyle(color: Colors.white, fontSize: 14),
-            ),
-            Text(
-              ' Screenplay ',
-              style: TextStyle(color: Colors.white, fontSize: 14),
-            ),
-          ],
-        ),
-      ],
+
+      children: crew.map((crew) => MediaNamesRowItem(crew: crew)).toList(),
+    );
+  }
+}
+
+class MediaNamesRowItem extends StatelessWidget {
+  final Crew crew;
+  const MediaNamesRowItem({super.key, required this.crew});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        children: [
+          Text(crew.name, style: TextStyle(color: Colors.white, fontSize: 14)),
+          Text(crew.job, style: TextStyle(color: Colors.white, fontSize: 14)),
+        ],
+      ),
     );
   }
 }
