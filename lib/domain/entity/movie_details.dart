@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:movie_app/domain/entity/movie_date_parser.dart';
 import 'package:movie_app/domain/entity/movie_details_credits.dart';
+import 'package:movie_app/domain/entity/movie_details_videos.dart';
 
 part 'movie_details.g.dart';
 
@@ -32,6 +33,7 @@ class MovieDetails {
   final double voteAverage;
   final int voteCount;
   final MovieDetailsCredits credits;
+  final MovieDetailsVideos videos;
 
   MovieDetails({
     required this.adult,
@@ -59,6 +61,7 @@ class MovieDetails {
     required this.voteAverage,
     required this.voteCount,
     required this.credits,
+    required this.videos,
   });
 
 

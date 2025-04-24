@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_app/domain/api_client/api_client.dart';
 import 'package:movie_app/domain/entity/movie_details_credits.dart';
+import 'package:movie_app/ui/navigation/main_navigation.dart';
 import 'package:movie_app/ui/widgets/elements/custom_paint.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 import 'package:movie_app/ui/widgets/movie_details/movie_details_model.dart';
@@ -94,6 +95,10 @@ class _CirclePercentage extends StatelessWidget {
     final movieDetails =
         NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
     var voteAverage = movieDetails?.voteAverage ?? 0;
+    final videos = movieDetails?.videos.results.where(
+      (video) => video.type == 'Trailer' && video.site == 'YouTube',
+    ).toList();
+    final trailerKey = videos != null && videos.isNotEmpty ? videos.first.key : null;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -121,16 +126,21 @@ class _CirclePercentage extends StatelessWidget {
             ],
           ),
         ),
-        Container(color: Colors.black, width: 1, height: 15),
-        TextButton(
-          onPressed: () {},
-          child: Row(
-            children: [
-              Icon(Icons.play_arrow, color: Colors.white),
-              Text('Play Trailer', style: TextStyle(color: Colors.white)),
-            ],
-          ),
-        ),
+        Container(color: const Color.fromARGB(255, 255, 255, 255), width: 1, height: 15),
+        trailerKey != null
+            ? TextButton(
+              onPressed: () => Navigator.of(context).pushNamed(
+                    MainNavigationRoutes.movieTrailer,
+                    arguments: trailerKey,
+                  ),
+              child: Row(
+                children: [
+                  Icon(Icons.play_arrow, color: Colors.white),
+                  Text('Play Trailer', style: TextStyle(color: Colors.white)),
+                ],
+              ),
+            )
+            : const Text('Trailer is not available', style: TextStyle(color: Colors.white)),
       ],
     );
   }

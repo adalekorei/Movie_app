@@ -6,11 +6,13 @@ import 'package:movie_app/ui/widgets/main_screen/main_screen.dart';
 import 'package:movie_app/ui/widgets/main_screen/main_screen_model.dart';
 import 'package:movie_app/ui/widgets/movie_details/movie_details.dart';
 import 'package:movie_app/ui/widgets/movie_details/movie_details_model.dart';
+import 'package:movie_app/ui/widgets/movie_trailer/movie_trailer.dart';
 
 abstract class MainNavigationRoutes {
   static const auth = 'auth';
   static const mainScreen = '/';
   static const movieDetails = '/movie_details';
+  static const movieTrailer = '/movie_details/trailer';
 }
 
 class MainNavigation {
@@ -27,6 +29,12 @@ class MainNavigation {
         final movieId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
           builder: (context) => NotifierProvider(create: () => MovieDetailsModel(movieId), child: const MovieDetails()),
+        );
+        case MainNavigationRoutes.movieTrailer:
+        final arguments = settings.arguments;
+final youtubeKey = arguments is String ? arguments : '';
+return MaterialPageRoute(
+          builder: (context) => MovieTrailer(youtubeKey: youtubeKey),
         );
       default:
         const widget = Text('Navigation error!');
