@@ -152,7 +152,7 @@ class AuthButton extends StatelessWidget {
                 child: CircularProgressIndicator(),
               ),
             )
-            : const Text('Login');
+            : const Text('Login', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),);
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(

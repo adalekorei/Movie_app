@@ -54,6 +54,16 @@ class _TopPoster extends StatelessWidget {
                     ? Image.network(ApiClient.imageUrl(posterPath))
                     : SizedBox.shrink(),
           ),
+          Positioned(
+            top: 5,
+            right: 5,
+            child: IconButton(
+              onPressed: () => model?.switchFavorite(),
+              icon: Icon(
+                model?.isMovieFavorite == true ? Icons.star : Icons.star_border, color: Colors.white,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -95,10 +105,14 @@ class _CirclePercentage extends StatelessWidget {
     final movieDetails =
         NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
     var voteAverage = movieDetails?.voteAverage ?? 0;
-    final videos = movieDetails?.videos.results.where(
-      (video) => video.type == 'Trailer' && video.site == 'YouTube',
-    ).toList();
-    final trailerKey = videos != null && videos.isNotEmpty ? videos.first.key : null;
+    final videos =
+        movieDetails?.videos.results
+            .where(
+              (video) => video.type == 'Trailer' && video.site == 'YouTube',
+            )
+            .toList();
+    final trailerKey =
+        videos != null && videos.isNotEmpty ? videos.first.key : null;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -126,10 +140,15 @@ class _CirclePercentage extends StatelessWidget {
             ],
           ),
         ),
-        Container(color: const Color.fromARGB(255, 255, 255, 255), width: 1, height: 15),
+        Container(
+          color: const Color.fromARGB(255, 255, 255, 255),
+          width: 1,
+          height: 15,
+        ),
         trailerKey != null
             ? TextButton(
-              onPressed: () => Navigator.of(context).pushNamed(
+              onPressed:
+                  () => Navigator.of(context).pushNamed(
                     MainNavigationRoutes.movieTrailer,
                     arguments: trailerKey,
                   ),
@@ -140,7 +159,10 @@ class _CirclePercentage extends StatelessWidget {
                 ],
               ),
             )
-            : const Text('Trailer is not available', style: TextStyle(color: Colors.white)),
+            : const Text(
+              'Trailer is not available',
+              style: TextStyle(color: Colors.white),
+            ),
       ],
     );
   }
