@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/navigation/main_navigation.dart';
 import 'package:movie_app/ui/theme/app_colors.dart';
+import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 import 'package:movie_app/ui/widgets/my_app/my_app_model.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MyApp extends StatelessWidget {
-  final MyAppModel model;
+  // final MyAppModel model;
   static final mainNavigation = MainNavigation();
-  const MyApp({super.key, required this.model});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final model = Provider.read<MyAppModel>(context);
     return MaterialApp(
       theme: ThemeData(
         appBarTheme: AppBarTheme(
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: const [Locale('en', ''), Locale('ua', '')],
       routes: mainNavigation.routes,
-      initialRoute: mainNavigation.initialRoute(model.isAuth),
+      initialRoute: mainNavigation.initialRoute(model?.isAuth == true),
       onGenerateRoute: mainNavigation.onGenerateRoute,
     );
   }

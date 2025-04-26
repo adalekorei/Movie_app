@@ -59,6 +59,9 @@ class AuthModel extends ChangeNotifier {
         case ApiClientExceptionType.Other:
           _errorMessage = 'Error happens, please try again!';
           break;
+        case ApiClientExceptionType.SessionExpired:
+        _errorMessage = 'Session expired, please log in into your account again';
+        break;
       }
     }
 

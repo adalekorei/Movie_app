@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:movie_app/domain/api_client/api_client.dart';
 import 'package:movie_app/domain/entity/movie_details_credits.dart';
 import 'package:movie_app/ui/navigation/main_navigation.dart';
