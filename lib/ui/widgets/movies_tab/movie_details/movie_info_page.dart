@@ -4,7 +4,7 @@ import 'package:movie_app/domain/entity/movie_details_credits.dart';
 import 'package:movie_app/ui/navigation/main_navigation.dart';
 import 'package:movie_app/ui/widgets/elements/custom_paint.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
-import 'package:movie_app/ui/widgets/movie_details/movie_details_model.dart';
+import 'package:movie_app/ui/widgets/movies_tab/movie_details/movie_details_model.dart';
 
 class MovieInfoPage extends StatelessWidget {
   const MovieInfoPage({super.key});

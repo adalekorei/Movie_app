@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/domain/api_client/api_client.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
-import 'package:movie_app/ui/widgets/movie_list/movie_list_model.dart';
+import 'package:movie_app/ui/widgets/movies_tab/movie_list/movie_list_model.dart';
 
 class MovieList extends StatelessWidget {
   const MovieList({super.key});

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/theme/app_colors.dart';
+import 'package:movie_app/ui/widgets/homepage/homepage.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
-import 'package:movie_app/ui/widgets/movie_list/movie_list.dart';
-import 'package:movie_app/ui/widgets/movie_list/movie_list_model.dart';
+import 'package:movie_app/ui/widgets/movies_tab/movie_list/movie_list.dart';
+import 'package:movie_app/ui/widgets/movies_tab/movie_list/movie_list_model.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -55,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          const Text('Home'),
+          Homepage(),
           NotifierProvider(
             create: () => movieListModel,
             isModelManaged: false,

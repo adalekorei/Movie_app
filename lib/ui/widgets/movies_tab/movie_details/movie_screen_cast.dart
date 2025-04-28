@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/domain/api_client/api_client.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
-import 'package:movie_app/ui/widgets/movie_details/movie_details_model.dart';
+import 'package:movie_app/ui/widgets/movies_tab/movie_details/movie_details_model.dart';
 
 class MovieScreenCast extends StatelessWidget {
   const MovieScreenCast({super.key});
@@ -46,7 +46,7 @@ class CastList extends StatelessWidget {
     var cast = model?.movieDetails?.credits.cast;
     if (cast == null || cast.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: 10,
+      itemCount: 6,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {

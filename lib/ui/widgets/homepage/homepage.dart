@@ -1,0 +1,72 @@
+import 'package:flutter/material.dart';
+import 'package:movie_app/ui/widgets/homepage/companies/companies.dart';
+import 'package:movie_app/ui/widgets/homepage/searchbar/custom_searchbar.dart';
+import 'package:movie_app/ui/widgets/homepage/most_popular_celebrities/most_popular_celebrities.dart';
+import 'package:movie_app/ui/widgets/homepage/trailers/trailers.dart';
+import 'package:movie_app/ui/widgets/homepage/trending/trending.dart';
+
+class Homepage extends StatelessWidget {
+  const Homepage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: Colors.white,
+      child: ListView(
+        children: [
+          CustomSearchbar(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Text(
+                  'Trending',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                ),
+              ),
+              Trending(),
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Text(
+                  'Latest Trailers',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Trailers(),
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Text(
+                  "Most Popular Celebrities",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              MostPopularCelebrities(),
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Text(
+                  "Companies",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Companies(),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
