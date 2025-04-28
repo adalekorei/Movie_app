@@ -42,11 +42,20 @@ class _MainScreenState extends State<MainScreen> {
           'Movie App',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed('auth');
+            },
+            icon: Icon(Icons.logout),
+            alignment: AlignmentDirectional.topStart,
+          ),
+        ],
       ),
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          const Text('News'),
+          const Text('Home'),
           NotifierProvider(
             create: () => movieListModel,
             isModelManaged: false,
@@ -58,7 +67,7 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'News'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
             backgroundColor: Colors.white,
             icon: Icon(Icons.movie),
