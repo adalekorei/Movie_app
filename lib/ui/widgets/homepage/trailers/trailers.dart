@@ -36,8 +36,6 @@ class TrailersItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(6),
-      child: InkWell(
-        onTap: () {},
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -81,11 +79,17 @@ class TrailersItem extends StatelessWidget {
                     ],
                   ),
                 ),
+                Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(10),
+                      onTap: () {},
+                    ),
+                  ),
               ],
             ),
           ),
-        ),
-      ),
+        ), 
     );
   }
 }

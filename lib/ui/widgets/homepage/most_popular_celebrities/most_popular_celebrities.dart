@@ -39,21 +39,15 @@ class MostPopularCelebritiesItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(6),
-      child: GestureDetector(
-        onTap: () {},
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            border: Border.all(color: Colors.black.withValues(alpha: 0.2)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.1),
-                blurRadius: 8,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
+        child: Material(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        elevation: 2,
+        shadowColor: Colors.black.withValues(alpha: 0.7),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10),
+          onTap: () {
+          },
           child: ClipRRect(
             clipBehavior: Clip.hardEdge,
             borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -77,7 +71,6 @@ class MostPopularCelebritiesItem extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+    ));
   }
 }

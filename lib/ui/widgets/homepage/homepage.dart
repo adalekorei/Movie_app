@@ -12,58 +12,63 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ColoredBox(
       color: Colors.white,
-      child: ListView(
+      child: Stack(
         children: [
-          CustomSearchbar(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          ListView(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  'Trending',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                ),
-              ),
-              Trending(),
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  'Latest Trailers',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 75),
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                      'Trending',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                    ),
                   ),
-                ),
-              ),
-              Trailers(),
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  "Most Popular Celebrities",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
+                  Trending(),
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                      'Latest Trailers',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              MostPopularCelebrities(),
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  "Companies",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
+                  Trailers(),
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                      "Most Popular Celebrities",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
-                ),
+                  MostPopularCelebrities(),
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                      "Companies",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  Companies(),
+                ],
               ),
-              Companies(),
             ],
           ),
+          CustomSearchbar(),
         ],
       ),
     );
