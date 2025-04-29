@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/widgets/homepage/companies/companies.dart';
-import 'package:movie_app/ui/widgets/homepage/searchbar/custom_searchbar.dart';
+import 'package:movie_app/ui/widgets/homepage/follow_on_social_networks.dart';
 import 'package:movie_app/ui/widgets/homepage/most_popular_celebrities/most_popular_celebrities.dart';
 import 'package:movie_app/ui/widgets/homepage/trailers/trailers.dart';
 import 'package:movie_app/ui/widgets/homepage/trending/trending.dart';
@@ -19,12 +19,15 @@ class Homepage extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 75),
+                  SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: Text(
                       'Trending',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                   Trending(),
@@ -64,14 +67,17 @@ class Homepage extends StatelessWidget {
                     ),
                   ),
                   Companies(),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: FollowOnSocialNetworks(),
+                  ),
                 ],
               ),
             ],
           ),
-          CustomSearchbar(),
         ],
       ),
     );
   }
 }
-

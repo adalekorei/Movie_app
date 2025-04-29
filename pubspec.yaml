@@ -39,6 +39,8 @@ dependencies:
   flutter_localization: ^0.3.2
   intl: ^0.19.0
   youtube_player_flutter: ^9.1.1
+  font_awesome_flutter: ^10.8.0
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:

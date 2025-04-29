@@ -20,7 +20,7 @@ class _AuthState extends State<Auth> {
         toolbarHeight: 40,
         backgroundColor: AppColors.mainColor,
         centerTitle: true,
-        title: const Text('Movie App'),
+        title: const Text('Movie App', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
       ),
       body: ListView(children: [HeaderWidget()]),
     );

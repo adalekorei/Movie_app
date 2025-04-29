@@ -47,6 +47,7 @@ class MostPopularCelebritiesItem extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
           onTap: () {
+            Navigator.of(context).pushNamed('/celebrities_info');
           },
           child: ClipRRect(
             clipBehavior: Clip.hardEdge,

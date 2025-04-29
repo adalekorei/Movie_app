@@ -83,7 +83,9 @@ class TrailersItem extends StatelessWidget {
                     color: Colors.transparent,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(10),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/trailers_info');
+                      },
                     ),
                   ),
               ],

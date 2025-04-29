@@ -21,16 +21,6 @@ class MovieScreenCast extends StatelessWidget {
             ),
           ),
           SizedBox(height: 270, child: Scrollbar(child: CastList())),
-          Padding(
-            padding: const EdgeInsets.all(2),
-            child: TextButton(
-              onPressed: () {},
-              child: Text(
-                'Full Cast & Crew',
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-          ),
         ],
       ),
     );

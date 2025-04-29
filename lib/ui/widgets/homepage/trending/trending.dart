@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/ui/navigation/main_navigation.dart';
 
 class Trending extends StatelessWidget {
   const Trending({super.key});
@@ -43,7 +44,9 @@ class TrendingItem extends StatelessWidget {
         shadowColor: Colors.black.withValues(alpha: 0.7),
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(MainNavigationRoutes.trendingDescription);
+          },
           child: ClipRRect(
             clipBehavior: Clip.hardEdge,
             borderRadius: BorderRadius.all(Radius.circular(8)),

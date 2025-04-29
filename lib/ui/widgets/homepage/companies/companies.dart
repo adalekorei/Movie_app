@@ -37,15 +37,16 @@ class CompaniesItem extends StatelessWidget {
     return Container(
       child: Padding(
         padding: EdgeInsets.all(6),
-          child: Material(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        elevation: 2,
-        shadowColor: Colors.black.withValues(alpha: 0.7),
-        child: InkWell(
+        child: Material(
+          color: Colors.white,
           borderRadius: BorderRadius.circular(10),
-          onTap: () {
-          },
+          elevation: 2,
+          shadowColor: Colors.black.withValues(alpha: 0.7),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(10),
+            onTap: () {
+              Navigator.of(context).pushNamed('/company_info');
+            },
             child: ClipRRect(
               clipBehavior: Clip.hardEdge,
               borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -68,7 +69,8 @@ class CompaniesItem extends StatelessWidget {
               ),
             ),
           ),
+        ),
       ),
-    ));
+    );
   }
 }

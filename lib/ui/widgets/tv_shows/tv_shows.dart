@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:movie_app/ui/widgets/homepage/searchbar/custom_searchbar.dart';
+import 'package:movie_app/ui/widgets/tv_shows/searchbar/custom_searchbar.dart';
 
 class TvShows extends StatelessWidget {
   const TvShows({super.key});
@@ -63,7 +63,9 @@ class TvShows extends StatelessWidget {
                     color: Colors.transparent,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(10),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/tv_show_info');
+                      },
                     ),
                   ),
                 ],

@@ -38,7 +38,7 @@ class _TopPoster extends StatelessWidget {
     final posterPath = model?.movieDetails?.posterPath;
 
     return AspectRatio(
-      aspectRatio: 390 / 219,
+      aspectRatio: 390 / 220,
       child: Stack(
         children: [
           backdropPath != null
@@ -204,7 +204,6 @@ class Summary extends StatelessWidget {
       maxLines: 3,
       textAlign: TextAlign.center,
       text.join(' '),
-      // 'R, 09/04/2025, (US) | 1h 58m, Action, Adventure, Thriller',
       style: const TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w400,
@@ -302,3 +301,4 @@ class MediaNamesRowItem extends StatelessWidget {
     );
   }
 }
+
