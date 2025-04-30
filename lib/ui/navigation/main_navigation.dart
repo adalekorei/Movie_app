@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/widgets/auth/auth.dart';
 import 'package:movie_app/ui/widgets/auth/auth_model.dart';
-import 'package:movie_app/ui/widgets/homepage/companies/company_info.dart';
-import 'package:movie_app/ui/widgets/homepage/most_popular_celebrities/celebrities_info.dart';
-import 'package:movie_app/ui/widgets/homepage/trailers/trailers_info.dart';
-import 'package:movie_app/ui/widgets/homepage/trending/trending_description.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/networks/networks_known_for_movies.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/networks/networks_info.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/most_popular_celebrities/celebrities_info.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/trailers/trailers_info.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/trending/trending_description.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 import 'package:movie_app/ui/widgets/main_screen/main_screen.dart';
 import 'package:movie_app/ui/widgets/main_screen/main_screen_model.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_details/movie_details.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_details/movie_details_model.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_trailer/movie_trailer.dart';
-import 'package:movie_app/ui/widgets/tv_shows/tv_shows_description.dart';
+import 'package:movie_app/ui/widgets/tv_shows_tab/tv_shows_description.dart';
 
 abstract class MainNavigationRoutes {
   static const auth = 'auth';
@@ -21,8 +22,9 @@ abstract class MainNavigationRoutes {
   static const trendingDescription = '/trending_description';
   static const trailersInfo = '/trailers_info';
   static const celebritiesInfo = '/celebrities_info';
-  static const companyInfo = '/company_info';
+  static const networksInfo = '/networks_info';
   static const tvShowsInfo = '/tv_show_info';
+  static const networksKnownForMovies = '/networks_known_for_movies';
 }
 
 class MainNavigation {
@@ -40,8 +42,10 @@ class MainNavigation {
         (context) => const TrendingDescription(),
     MainNavigationRoutes.trailersInfo: (context) => const TrailersInfo(),
     MainNavigationRoutes.celebritiesInfo: (context) => const CelebritiesInfo(),
-    MainNavigationRoutes.companyInfo: (context) => const CompanyInfo(),
-    MainNavigationRoutes.tvShowsInfo: (context) => const TvShowsDescription(),
+    MainNavigationRoutes.networksInfo: (context) => const NetworksInfo(),
+    MainNavigationRoutes.tvShowsInfo: (context) => const TvShowsInfo(),
+    MainNavigationRoutes.networksKnownForMovies:
+        (context) => const NetworksKnownForMovies(),
   };
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/theme/app_colors.dart';
-import 'package:movie_app/ui/widgets/homepage/homepage.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/homepage.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_list/movie_list.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_list/movie_list_model.dart';
-import 'package:movie_app/ui/widgets/tv_shows/tv_shows.dart';
+import 'package:movie_app/ui/widgets/tv_shows_tab/tv_shows.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

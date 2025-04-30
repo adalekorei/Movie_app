@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/ui/theme/app_colors.dart';
 import 'package:movie_app/ui/widgets/elements/custom_paint.dart';
 
-class TvShowsDescription extends StatelessWidget {
-  const TvShowsDescription({super.key});
+class TvShowsInfo extends StatelessWidget {
+  const TvShowsInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class TvShowsDescription extends StatelessWidget {
         toolbarHeight: 40,
         centerTitle: true,
         title: Text(
-          'Tv shows',
+          'Name of Tv show',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),

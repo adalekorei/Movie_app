@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/ui/widgets/homepage/companies/companies.dart';
-import 'package:movie_app/ui/widgets/homepage/follow_on_social_networks.dart';
-import 'package:movie_app/ui/widgets/homepage/most_popular_celebrities/most_popular_celebrities.dart';
-import 'package:movie_app/ui/widgets/homepage/trailers/trailers.dart';
-import 'package:movie_app/ui/widgets/homepage/trending/trending.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/networks/networks.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/follow_on_social_networks.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/most_popular_celebrities/most_popular_celebrities.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/trailers/trailers.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/trending/trending.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -58,7 +58,7 @@ class Homepage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: Text(
-                      "Companies",
+                      "Networks",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -66,7 +66,7 @@ class Homepage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Companies(),
+                  Networks(),
                   SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.only(left: 5),

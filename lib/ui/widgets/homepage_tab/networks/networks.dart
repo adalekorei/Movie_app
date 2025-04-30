@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class Companies extends StatelessWidget {
-  const Companies({super.key});
+class Networks extends StatelessWidget {
+  const Networks({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 220, child: Scrollbar(child: CompaniesCard())),
+        SizedBox(height: 220, child: Scrollbar(child: NetworksCard())),
       ],
     );
   }
 }
 
-class CompaniesCard extends StatelessWidget {
-  const CompaniesCard({super.key});
+class NetworksCard extends StatelessWidget {
+  const NetworksCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +23,14 @@ class CompaniesCard extends StatelessWidget {
       itemExtent: 145,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
-        return CompaniesItem();
+        return NetworksItem();
       },
     );
   }
 }
 
-class CompaniesItem extends StatelessWidget {
-  const CompaniesItem({super.key});
+class NetworksItem extends StatelessWidget {
+  const NetworksItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class CompaniesItem extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(10),
             onTap: () {
-              Navigator.of(context).pushNamed('/company_info');
+              Navigator.of(context).pushNamed('/networks_info');
             },
             child: ClipRRect(
               clipBehavior: Clip.hardEdge,
@@ -59,7 +59,7 @@ class CompaniesItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Company name'),
+                        Text('Networks name'),
                         Text('Headquarters'),
                         Text('Origin country'),
                       ],
