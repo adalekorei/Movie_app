@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/ui/navigation/main_navigation.dart';
 
 class NetworksInfo extends StatelessWidget {
   const NetworksInfo({super.key});
@@ -140,7 +141,7 @@ class NetworksItem extends StatelessWidget {
                   onTap: () {
                     Navigator.of(
                       context,
-                    ).pushNamed('/networks_known_for_movies');
+                    ).pushNamed(MainNavigationRoutes.networksKnownForMovies);
                   },
                 ),
               ),

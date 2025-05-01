@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/domain/api_client/api_client.dart';
-import 'package:movie_app/domain/entity/movie_details_credits.dart';
+import 'package:movie_app/domain/entity/movies/movie_details_credits.dart';
 import 'package:movie_app/ui/navigation/main_navigation.dart';
 import 'package:movie_app/ui/widgets/elements/custom_paint.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';

@@ -4,9 +4,25 @@ import 'package:movie_app/ui/widgets/homepage_tab/follow_on_social_networks.dart
 import 'package:movie_app/ui/widgets/homepage_tab/most_popular_celebrities/most_popular_celebrities.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trailers/trailers.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trending/trending.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/trending/trending_model.dart';
+import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 
-class Homepage extends StatelessWidget {
-  const Homepage({super.key});
+class Homepage extends StatefulWidget {
+  Homepage({super.key});
+
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  final trendingModel = TrendingModel();
+
+  @override
+  void initState() {
+    super.initState();
+
+    trendingModel.loadTrendingAll();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +46,10 @@ class Homepage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Trending(),
+                  NotifierProvider(
+                    create: () => trendingModel,
+                    isModelManaged: false,
+                    child: const Trending()),
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: Text(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_app/domain/api_client/api_client.dart';
 import 'package:movie_app/domain/data_providers/session_data_provider.dart';
-import 'package:movie_app/domain/entity/movie_details.dart';
+import 'package:movie_app/domain/entity/movies/movie_details.dart';
 
 class MovieDetailsModel extends ChangeNotifier {
   final _apiClient = ApiClient();

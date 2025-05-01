@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/theme/app_colors.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/homepage.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/trending/trending_model.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_list/movie_list.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_list/movie_list_model.dart';
 import 'package:movie_app/ui/widgets/tv_shows_tab/tv_shows.dart';
+import 'package:movie_app/ui/widgets/tv_shows_tab/tv_shows_model.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -18,12 +20,20 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   var _selectedTab = 0;
   final movieListModel = MovieListModel();
+  final tvShowModel = TvShowsModel();
 
   void onSelectTab(int index) {
     if (_selectedTab == index) return;
     setState(() {
       _selectedTab = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    
+    tvShowModel.loadTvShows();
   }
 
   @override
@@ -57,13 +67,19 @@ class _MainScreenState extends State<MainScreen> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          Homepage(),
+          NotifierProvider(
+            create: () => TrendingModel(),
+            isModelManaged: false,
+            child: Homepage()),
           NotifierProvider(
             create: () => movieListModel,
             isModelManaged: false,
             child: const MovieList(),
           ),
-          TvShows(),
+          NotifierProvider(
+            create: () => tvShowModel,
+            isModelManaged: false,
+            child: const TvShows()),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:movie_app/domain/api_client/api_client.dart';
+import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 import 'package:movie_app/ui/widgets/tv_shows_tab/searchbar/custom_searchbar.dart';
+import 'package:movie_app/ui/widgets/tv_shows_tab/tv_shows_model.dart';
 
-class TvShows extends StatelessWidget {
+class TvShows extends StatefulWidget {
   const TvShows({super.key});
 
   @override
+  State<TvShows> createState() => _TvShowsState();
+}
+
+class _TvShowsState extends State<TvShows> {
+  @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<TvShowsModel>(context);
+    if (model == null) return const SizedBox.shrink();
     return Stack(
       children: [
         ListView.builder(
           padding: EdgeInsets.only(top: 65),
-          itemCount: 20,
+          itemCount: model.tvShows.length,
           itemExtent: 165,
           itemBuilder: (BuildContext context, int index) {
+            final tvShow = model.tvShows[index];
+            final posterPath = tvShow.posterPath;
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Stack(
@@ -36,7 +48,12 @@ class TvShows extends StatelessWidget {
                     clipBehavior: Clip.hardEdge,
                     child: Row(
                       children: [
-                        Image.asset('assets/images/robot.webp'),
+                        posterPath != null
+                            ? Image.network(
+                              ApiClient.imageUrl(posterPath),
+                              width: 95,
+                            )
+                            : SizedBox.shrink(),
                         SizedBox(width: 10),
                         Expanded(
                           child: Column(
@@ -44,28 +61,33 @@ class TvShows extends StatelessWidget {
                             children: [
                               SizedBox(height: 20),
                               Text(
-                                'Tv show name',
+                                tvShow.name,
                                 style: TextStyle(fontWeight: FontWeight.bold),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              Text('Release date'),
+                              Text(
+                                model.stringFromDate(
+                                  DateTime.tryParse(tvShow.firstAirDate),
+                                ),
+                              ),
                               SizedBox(height: 20),
-                              Text('Detailed description', maxLines: 2,
-                                overflow: TextOverflow.ellipsis,),
+                              Text(
+                                tvShow.overview,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                                  Material(
+                  Material(
                     color: Colors.transparent,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(10),
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/tv_show_info');
-                      },
+                      onTap: () => model.onTvShowTap(context, index),
                     ),
                   ),
                 ],

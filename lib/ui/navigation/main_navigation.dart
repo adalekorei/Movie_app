@@ -12,7 +12,7 @@ import 'package:movie_app/ui/widgets/main_screen/main_screen_model.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_details/movie_details.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_details/movie_details_model.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_trailer/movie_trailer.dart';
-import 'package:movie_app/ui/widgets/tv_shows_tab/tv_shows_description.dart';
+import 'package:movie_app/ui/widgets/tv_shows_tab/tv_shows_info.dart';
 
 abstract class MainNavigationRoutes {
   static const auth = 'auth';

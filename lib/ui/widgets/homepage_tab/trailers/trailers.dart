@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/ui/navigation/main_navigation.dart';
 
 class Trailers extends StatelessWidget {
   const Trailers({super.key});
@@ -84,7 +85,7 @@ class TrailersItem extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(10),
                       onTap: () {
-                        Navigator.of(context).pushNamed('/trailers_info');
+                        Navigator.of(context).pushNamed(MainNavigationRoutes.trailersInfo);
                       },
                     ),
                   ),
