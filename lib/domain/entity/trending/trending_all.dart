@@ -6,20 +6,21 @@ part 'trending_all.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake)
 class TrendingAll {
   final bool adult;
-  final String? backdropPath;
+  final String backdropPath;
   final int? id;
   final String? title;
-  final String? originalLanguage;
+  final String originalLanguage;
   final String? originalTitle;
-  final String? overview;
-  final String? posterPath;
+  final String overview;
+  final String posterPath;
   final String? mediaType;
   final List<int> genreIds;
-  final double? popularity;
+  final double popularity;
   final String? releaseDate;
   final bool? video;
-  final double? voteAverage;
-  final int? voteCount;
+  final double voteAverage;
+  final int voteCount;
+  final String? originalName;
 
   TrendingAll({
     required this.adult,
@@ -37,9 +38,21 @@ class TrendingAll {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
+    required this.originalName,
   });
 
   factory TrendingAll.fromJson(Map<String, dynamic> json) =>
       _$TrendingAllFromJson(json);
   Map<String, dynamic> toJson() => _$TrendingAllToJson(this);
+
+  String get movieAndTvShowTitle {
+    switch (mediaType) {
+      case 'movie':
+        return title ?? 'Untitled Movie';
+      case 'tv':
+        return originalName ?? 'Untitled TV Show';
+      default:
+        return 'name is not available';
+    }
+  }
 }

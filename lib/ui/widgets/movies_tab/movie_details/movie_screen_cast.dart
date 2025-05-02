@@ -36,7 +36,7 @@ class CastList extends StatelessWidget {
     var cast = model?.movieDetails?.credits.cast;
     if (cast == null || cast.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: 6,
+      itemCount: 10,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
@@ -78,7 +78,7 @@ class CastListItem extends StatelessWidget {
             children: [
               profilePath != null
                   ? Image.network(ApiClient.imageUrl(profilePath))
-                  : const SizedBox.shrink(),
+                  : Image.asset('assets/images/images.png', width: 125, fit: BoxFit.fitWidth, height: 165,),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(

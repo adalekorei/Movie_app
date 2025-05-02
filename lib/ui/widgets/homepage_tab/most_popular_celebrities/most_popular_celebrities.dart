@@ -1,78 +1,79 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/ui/navigation/main_navigation.dart';
+import 'package:movie_app/domain/api_client/api_client.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/most_popular_celebrities/most_popular_celebrities_model.dart';
+import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 
 class MostPopularCelebrities extends StatelessWidget {
   const MostPopularCelebrities({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 300,
-          child: Scrollbar(child: MostPopularCelebritiesCard()),
-        ),
-      ],
-    );
-  }
-}
-
-class MostPopularCelebritiesCard extends StatelessWidget {
-  const MostPopularCelebritiesCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 20,
-      itemExtent: 145,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (BuildContext context, int index) {
-        return MostPopularCelebritiesItem();
-      },
-    );
-  }
-}
-
-class MostPopularCelebritiesItem extends StatelessWidget {
-  const MostPopularCelebritiesItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(6),
-        child: Material(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        elevation: 2,
-        shadowColor: Colors.black.withValues(alpha: 0.7),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(10),
-          onTap: () {
-            Navigator.of(context).pushNamed(MainNavigationRoutes.celebritiesInfo);
-          },
-          child: ClipRRect(
-            clipBehavior: Clip.hardEdge,
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset('assets/images/pedro.webp'),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
+    final model = NotifierProvider.watch<MostPopularCelebritiesModel>(context);
+    if (model == null) return SizedBox.shrink();
+    return SizedBox(
+      height: 235,
+      child: Scrollbar(
+        child: ListView.builder(
+          itemCount: model.results.length,
+          itemExtent: 135,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int index) {
+            final celebrity = model.results[index];
+            final posterPath = celebrity.profilePath;
+            return Padding(
+              padding: const EdgeInsets.all(6),
+              child: Material(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                elevation: 4,
+                shadowColor: Colors.black.withValues(alpha: 2),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12),
+                  onTap: () => model.onCelebrityTap(context, index),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Actor name'),
-                      Text('Birthday'),
-                      Text('Place of Birth'),
-                      Text('Popularity'),
+                      ClipRRect(
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(12),
+                        ),
+                        child:
+                            posterPath != null
+                                ? Image.network(
+                                  ApiClient.imageUrl(posterPath),
+                                  width: 125,
+                                  fit: BoxFit.fitWidth,
+                                )
+                                : Image.asset('assets/images/images.png', width: 125, fit: BoxFit.fitWidth, height: 185,),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 6,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                celebrity.name,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
-    ));
+      ),
+    );
   }
 }

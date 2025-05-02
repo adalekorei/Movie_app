@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/most_popular_celebrities/most_popular_celebrities.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/most_popular_celebrities/most_popular_celebrities_model.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/networks/networks.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/follow_on_social_networks.dart';
-import 'package:movie_app/ui/widgets/homepage_tab/most_popular_celebrities/most_popular_celebrities.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trailers/trailers.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trending/trending.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trending/trending_model.dart';
@@ -16,12 +17,14 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   final trendingModel = TrendingModel();
+  final mostPopularCelebritiesModel = MostPopularCelebritiesModel();
 
   @override
   void initState() {
     super.initState();
 
     trendingModel.loadTrendingAll();
+    mostPopularCelebritiesModel.loadCelebrities();
   }
 
   @override
@@ -49,7 +52,8 @@ class _HomepageState extends State<Homepage> {
                   NotifierProvider(
                     create: () => trendingModel,
                     isModelManaged: false,
-                    child: const Trending()),
+                    child: const Trending(),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: Text(
@@ -73,7 +77,11 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                   ),
-                  MostPopularCelebrities(),
+                  NotifierProvider(
+                    create: () => mostPopularCelebritiesModel,
+                    isModelManaged: false,
+                    child: const MostPopularCelebrities(),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: Text(

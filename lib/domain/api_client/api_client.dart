@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:movie_app/domain/entity/celebrities/celebrities.dart';
 import 'package:movie_app/domain/entity/movies/movie_details.dart';
 import 'package:movie_app/domain/entity/movies/popular_movies_response.dart';
 import 'package:movie_app/domain/entity/trending/trending_all_response.dart';
@@ -57,31 +58,31 @@ class ApiClient {
     }
   }
 
-Future<T> _get<T>(
-  String path,
-  T Function(dynamic json) parser, [
-  Map<String, dynamic>? parameters,
-]) async {
-  final url = _makeUri(path, parameters);
-  try {
-    final request = await _client.getUrl(url);
-    final response = await request.close();
+  Future<T> _get<T>(
+    String path,
+    T Function(dynamic json) parser, [
+    Map<String, dynamic>? parameters,
+  ]) async {
+    final url = _makeUri(path, parameters);
+    try {
+      final request = await _client.getUrl(url);
+      final response = await request.close();
 
-    final responseBody = await response.transform(utf8.decoder).join();
-    final dynamic json = jsonDecode(responseBody);
+      final responseBody = await response.transform(utf8.decoder).join();
+      final dynamic json = jsonDecode(responseBody);
 
-    _validateResponse(response, json);
+      _validateResponse(response, json);
 
-    final result = parser(json);
-    return result;
-  } on SocketException {
-    throw ApiClientException(type: ApiClientExceptionType.Network);
-  } on ApiClientException {
-    rethrow;
-  } catch (e) {
-    throw ApiClientException(type: ApiClientExceptionType.Other);
+      final result = parser(json);
+      return result;
+    } on SocketException {
+      throw ApiClientException(type: ApiClientExceptionType.Network);
+    } on ApiClientException {
+      rethrow;
+    } catch (e) {
+      throw ApiClientException(type: ApiClientExceptionType.Other);
+    }
   }
-}
 
   Future<T> _post<T>(
     String path,
@@ -145,12 +146,29 @@ Future<T> _get<T>(
       final response = TrendingAllResponse.fromJson(jsonMap);
       return response;
     };
-    final result =  _get('/trending/all/$time_window', parser, <String, dynamic>{
+    final result = _get('/trending/all/$time_window', parser, <String, dynamic>{
       'api_key': _apiKey,
       'language': local,
     });
     return result;
   }
+
+  Future<CelebritiesResponse> popularCelebrities(
+    String local, {
+    required String time_window,
+  }) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = CelebritiesResponse.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get('/trending/person/$time_window', parser, <String, dynamic>{
+      'api_key': _apiKey,
+      'language': local,
+    });
+    return result;
+  }
+
 
   Future<int> getAccountInfo(String sessionId) async {
     final parser = (dynamic json) {

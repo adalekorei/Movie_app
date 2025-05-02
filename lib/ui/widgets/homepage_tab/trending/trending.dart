@@ -3,7 +3,6 @@ import 'package:movie_app/domain/api_client/api_client.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trending/trending_model.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 
-
 class Trending extends StatelessWidget {
   const Trending({super.key});
 
@@ -22,7 +21,6 @@ class Trending extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 final moviesAndTvShows = model.trendingAll[index];
-                final title = moviesAndTvShows.title ?? moviesAndTvShows.originalTitle ?? 'not available';
                 final posterPath = moviesAndTvShows.posterPath;
                 return Padding(
                   padding: EdgeInsets.all(6),
@@ -44,13 +42,14 @@ class Trending extends StatelessWidget {
                                 SizedBox(
                                   height: 170,
                                   width: double.infinity,
-                                  child: posterPath != null
-                            ? Image.network(
-                              ApiClient.imageUrl(posterPath),
-                              width: 115,
-                              fit: BoxFit.fitWidth,
-                            )
-                            : SizedBox.shrink(),
+                                  child:
+                                      posterPath != null
+                                          ? Image.network(
+                                            ApiClient.imageUrl(posterPath),
+                                            width: 115,
+                                            fit: BoxFit.fitWidth,
+                                          )
+                                          : SizedBox.shrink(),
                                 ),
                                 Positioned(
                                   right: 8,
@@ -77,7 +76,7 @@ class Trending extends StatelessWidget {
                                     top: 5,
                                   ),
                                   child: Text(
-                                    title,
+                                    moviesAndTvShows.movieAndTvShowTitle,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -96,7 +95,8 @@ class Trending extends StatelessWidget {
                                       ),
                                       SizedBox(width: 2),
                                       Text(
-                                        moviesAndTvShows.voteAverage!.toStringAsFixed(1),
+                                        moviesAndTvShows.voteAverage
+                                            .toStringAsFixed(1),
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 14,

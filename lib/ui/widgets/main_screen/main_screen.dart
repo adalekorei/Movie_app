@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/theme/app_colors.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/homepage.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/most_popular_celebrities/most_popular_celebrities_model.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trending/trending_model.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_list/movie_list.dart';
@@ -68,11 +69,11 @@ class _MainScreenState extends State<MainScreen> {
         index: _selectedTab,
         children: [
           NotifierProvider(
-            create: () => TrendingModel(),
+            create: () => TrendingModel(), 
             isModelManaged: false,
             child: Homepage()),
           NotifierProvider(
-            create: () => movieListModel,
+            create: () => movieListModel, 
             isModelManaged: false,
             child: const MovieList(),
           ),
