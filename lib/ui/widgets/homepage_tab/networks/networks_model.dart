@@ -8,7 +8,7 @@ class NetworksModel extends ChangeNotifier {
   final _networks = <NetworksResponse>[];
   List<NetworksResponse> get networks => List.unmodifiable(_networks);
 
-// List of networks is in not possible to get from this API, so cycle below is forced action.
+// List of networks is not possible to get from this API, so cycle below is forced action.
 Future<void> loadNetworks() async {
   _networks.clear();
   for (var i = 1; i <= 20; i++) {

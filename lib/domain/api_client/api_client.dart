@@ -5,6 +5,7 @@ import 'package:movie_app/domain/entity/celebrities/celebrities.dart';
 import 'package:movie_app/domain/entity/movies/movie_details.dart';
 import 'package:movie_app/domain/entity/movies/popular_movies_response.dart';
 import 'package:movie_app/domain/entity/networks/networks_response.dart';
+import 'package:movie_app/domain/entity/trailers/trailers.dart';
 import 'package:movie_app/domain/entity/trending/trending_all_response.dart';
 import 'package:movie_app/domain/entity/tv_show/tv_show_response.dart';
 
@@ -50,14 +51,22 @@ class ApiClient {
     return sessionId;
   }
 
-  Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
-    final uri = Uri.parse('$_host$path');
-    if (parameters != null) {
-      return uri.replace(queryParameters: parameters);
-    } else {
-      return uri;
-    }
+Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
+  final uri = Uri.parse('$_host$path');
+  if (parameters != null) {
+    final queryParameters = parameters.map((key, value) {
+      if (value is int) {
+        value = value.toString();
+      } else if (value is! String && value is! Iterable) {
+        value = value.toString(); 
+      }
+      return MapEntry(key, value is Iterable ? value.join(',') : value.toString());
+    });
+    return uri.replace(queryParameters: queryParameters);
+  } else {
+    return uri;
   }
+}
 
   Future<T> _get<T>(
     String path,
@@ -163,16 +172,15 @@ class ApiClient {
       final response = CelebritiesResponse.fromJson(jsonMap);
       return response;
     };
-    final result = _get('/trending/person/$time_window', parser, <String, dynamic>{
-      'api_key': _apiKey,
-      'language': local,
-    });
+    final result = _get(
+      '/trending/person/$time_window',
+      parser,
+      <String, dynamic>{'api_key': _apiKey, 'language': local},
+    );
     return result;
   }
 
-  Future<NetworksResponse> popularNetwork ({
-    required int network_id,
-  }) async {
+  Future<NetworksResponse> popularNetwork({required int network_id}) async {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = NetworksResponse.fromJson(jsonMap);
@@ -180,6 +188,20 @@ class ApiClient {
     };
     final result = _get('/network/$network_id', parser, <String, dynamic>{
       'api_key': _apiKey,
+    });
+    return result;
+  }
+
+  Future<TrailersResponse> popularTrailers(String local, int page) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TrailersResponse.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get('/movie/upcoming', parser, <String, dynamic>{
+      'api_key': _apiKey,
+      'language': local,
+      'page': page,
     });
     return result;
   }

@@ -19,7 +19,7 @@ class _MovieTrailerState extends State<MovieTrailer> {
     super.initState();
     _controller = YoutubePlayerController(
       initialVideoId: widget.youtubeKey,
-      flags: const YoutubePlayerFlags(autoPlay: true, mute: false),
+      flags: const YoutubePlayerFlags(autoPlay: false, mute: false),
     );
   }
 

@@ -5,6 +5,7 @@ import 'package:movie_app/ui/widgets/homepage_tab/networks/networks.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/follow_on_social_networks.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/networks/networks_model.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trailers/trailers.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/trailers/trailers_model.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trending/trending.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trending/trending_model.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
@@ -20,6 +21,7 @@ class _HomepageState extends State<Homepage> {
   final trendingModel = TrendingModel();
   final mostPopularCelebritiesModel = MostPopularCelebritiesModel();
   final networksModel = NetworksModel();
+  final trailersModel = TrailersModel();
 
   @override
   void initState() {
@@ -28,6 +30,7 @@ class _HomepageState extends State<Homepage> {
     trendingModel.loadTrendingAll();
     mostPopularCelebritiesModel.loadCelebrities();
     networksModel.loadNetworks();
+    trailersModel.loadTrailers();
   }
 
   @override
@@ -68,7 +71,11 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                   ),
-                  Trailers(),
+                  NotifierProvider(
+                    create: () => trailersModel,
+                    isModelManaged: false,
+                    child: const Trailers(),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: Text(

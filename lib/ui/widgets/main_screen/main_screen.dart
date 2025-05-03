@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/theme/app_colors.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/homepage.dart';
-import 'package:movie_app/ui/widgets/homepage_tab/trending/trending_model.dart';
+
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_list/movie_list.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_list/movie_list_model.dart';

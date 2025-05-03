@@ -34,16 +34,23 @@ class Networks extends StatelessWidget {
                     clipBehavior: Clip.hardEdge,
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         logoPath != null
-                                ? Image.network(
-                                  ApiClient.imageUrl(logoPath),
-                                  width: 110,
-                                  height: 135,
-                                  fit: BoxFit.fitWidth,
-                                )
-                                : Image.asset('assets/images/images.png', width: 125, fit: BoxFit.fitWidth, height: 185),
+                            ? Center(
+                              child: Image.network(
+                                ApiClient.imageUrl(logoPath),
+                                width: 110,
+                                height: 135,
+                                fit: BoxFit.fitWidth,
+                              ),
+                            )
+                            : Image.asset(
+                              'assets/images/images.png',
+                              width: 125,
+                              fit: BoxFit.fitWidth,
+                              height: 185,
+                            ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: Column(

@@ -40,7 +40,6 @@ class MainNavigation {
         ),
     MainNavigationRoutes.trendingDescription:
         (context) => const TrendingDescription(),
-    MainNavigationRoutes.trailersInfo: (context) => const TrailersInfo(),
     MainNavigationRoutes.celebritiesInfo: (context) => const CelebritiesInfo(),
     MainNavigationRoutes.networksInfo: (context) => const NetworksInfo(),
     MainNavigationRoutes.tvShowsInfo: (context) => const TvShowsInfo(),
@@ -61,9 +60,15 @@ class MainNavigation {
         );
       case MainNavigationRoutes.movieTrailer:
         final arguments = settings.arguments;
-        final youtubeKey = arguments is String ? arguments : '';
+        final youtubeKey = arguments is String ? arguments : 'dQw4w9WgXcQ';
         return MaterialPageRoute(
           builder: (context) => MovieTrailer(youtubeKey: youtubeKey),
+        );
+        case MainNavigationRoutes.trailersInfo:
+        final arguments = settings.arguments;
+        final youtubeKey = arguments is String ? arguments : 'dQw4w9WgXcQ';
+        return MaterialPageRoute(
+          builder: (context) => TrailersInfo(youtubeKey: youtubeKey),
         );
       default:
         const widget = Text('Navigation error!');
