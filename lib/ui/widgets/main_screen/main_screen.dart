@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/theme/app_colors.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/homepage.dart';
-import 'package:movie_app/ui/widgets/homepage_tab/most_popular_celebrities/most_popular_celebrities_model.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trending/trending_model.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_list/movie_list.dart';
@@ -33,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    
+
     tvShowModel.loadTvShows();
   }
 
@@ -68,19 +67,17 @@ class _MainScreenState extends State<MainScreen> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
+          Homepage(),
           NotifierProvider(
-            create: () => TrendingModel(), 
-            isModelManaged: false,
-            child: Homepage()),
-          NotifierProvider(
-            create: () => movieListModel, 
+            create: () => movieListModel,
             isModelManaged: false,
             child: const MovieList(),
           ),
           NotifierProvider(
             create: () => tvShowModel,
             isModelManaged: false,
-            child: const TvShows()),
+            child: const TvShows(),
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

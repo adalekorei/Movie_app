@@ -3,6 +3,7 @@ import 'package:movie_app/ui/widgets/homepage_tab/most_popular_celebrities/most_
 import 'package:movie_app/ui/widgets/homepage_tab/most_popular_celebrities/most_popular_celebrities_model.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/networks/networks.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/follow_on_social_networks.dart';
+import 'package:movie_app/ui/widgets/homepage_tab/networks/networks_model.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trailers/trailers.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trending/trending.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trending/trending_model.dart';
@@ -18,6 +19,7 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   final trendingModel = TrendingModel();
   final mostPopularCelebritiesModel = MostPopularCelebritiesModel();
+  final networksModel = NetworksModel();
 
   @override
   void initState() {
@@ -25,6 +27,7 @@ class _HomepageState extends State<Homepage> {
 
     trendingModel.loadTrendingAll();
     mostPopularCelebritiesModel.loadCelebrities();
+    networksModel.loadNetworks();
   }
 
   @override
@@ -93,7 +96,11 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                   ),
-                  Networks(),
+                  NotifierProvider(
+                    create: () => networksModel,
+                    isModelManaged: false,
+                    child: const Networks(),
+                  ),
                   SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
