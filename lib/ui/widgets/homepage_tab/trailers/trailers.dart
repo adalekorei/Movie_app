@@ -18,6 +18,7 @@ class Trailers extends StatelessWidget {
           itemExtent: 370,
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
+            model.shownTrailerAtIndex(index);
             final trailers = model.trailers[index];
             final posterPath = trailers.posterPath;
             return Padding(
@@ -92,7 +93,12 @@ class Trailers extends StatelessWidget {
                       Positioned(
                         bottom: 135,
                         left: 140,
-                        child: Icon(Icons.play_arrow, size: 70, color: const Color.fromARGB(206, 255, 255, 255),)),
+                        child: Icon(
+                          Icons.play_arrow,
+                          size: 70,
+                          color: const Color.fromARGB(206, 255, 255, 255),
+                        ),
+                      ),
                       Material(
                         color: Colors.transparent,
                         child: InkWell(

@@ -51,22 +51,25 @@ class ApiClient {
     return sessionId;
   }
 
-Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
-  final uri = Uri.parse('$_host$path');
-  if (parameters != null) {
-    final queryParameters = parameters.map((key, value) {
-      if (value is int) {
-        value = value.toString();
-      } else if (value is! String && value is! Iterable) {
-        value = value.toString(); 
-      }
-      return MapEntry(key, value is Iterable ? value.join(',') : value.toString());
-    });
-    return uri.replace(queryParameters: queryParameters);
-  } else {
-    return uri;
+  Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
+    final uri = Uri.parse('$_host$path');
+    if (parameters != null) {
+      final queryParameters = parameters.map((key, value) {
+        if (value is int) {
+          value = value.toString();
+        } else if (value is! String && value is! Iterable) {
+          value = value.toString();
+        }
+        return MapEntry(
+          key,
+          value is Iterable ? value.join(',') : value.toString(),
+        );
+      });
+      return uri.replace(queryParameters: queryParameters);
+    } else {
+      return uri;
+    }
   }
-}
 
   Future<T> _get<T>(
     String path,
@@ -122,11 +125,12 @@ Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
   }
 
   Future<String> _makeToken() async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final token = jsonMap['request_token'] as String;
       return token;
-    };
+    }
+
     final result = _get('/authentication/token/new', parser, <String, dynamic>{
       'api_key': _apiKey,
     });
@@ -134,11 +138,12 @@ Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
   }
 
   Future<TvShowResponse> popularTvShows(String local, int page) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TvShowResponse.fromJson(jsonMap);
       return response;
-    };
+    }
+
     final result = _get('/tv/popular', parser, <String, dynamic>{
       'api_key': _apiKey,
       'language': local,
@@ -148,44 +153,50 @@ Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
   }
 
   Future<TrendingAllResponse> trendingMoviesAndShows(
-    String local, {
+    String local,
+    int page, {
     required String time_window,
   }) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TrendingAllResponse.fromJson(jsonMap);
       return response;
-    };
+    }
+
     final result = _get('/trending/all/$time_window', parser, <String, dynamic>{
       'api_key': _apiKey,
       'language': local,
+      'page': page,
     });
     return result;
   }
 
   Future<CelebritiesResponse> popularCelebrities(
-    String local, {
+    String local,
+    int page, {
     required String time_window,
   }) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = CelebritiesResponse.fromJson(jsonMap);
       return response;
-    };
+    }
+
     final result = _get(
       '/trending/person/$time_window',
       parser,
-      <String, dynamic>{'api_key': _apiKey, 'language': local},
+      <String, dynamic>{'api_key': _apiKey, 'language': local, 'page': page},
     );
     return result;
   }
 
   Future<NetworksResponse> popularNetwork({required int network_id}) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = NetworksResponse.fromJson(jsonMap);
       return response;
-    };
+    }
+
     final result = _get('/network/$network_id', parser, <String, dynamic>{
       'api_key': _apiKey,
     });
@@ -193,11 +204,12 @@ Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
   }
 
   Future<TrailersResponse> popularTrailers(String local, int page) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TrailersResponse.fromJson(jsonMap);
       return response;
-    };
+    }
+
     final result = _get('/movie/upcoming', parser, <String, dynamic>{
       'api_key': _apiKey,
       'language': local,
@@ -207,11 +219,12 @@ Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
   }
 
   Future<int> getAccountInfo(String sessionId) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final result = jsonMap['id'] as int;
       return result;
-    };
+    }
+
     final result = _get('/account', parser, <String, dynamic>{
       'api_key': _apiKey,
       'session_id': sessionId,
@@ -220,11 +233,12 @@ Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
   }
 
   Future<PopularMoviesResponse> popularMovies(int page, String local) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularMoviesResponse.fromJson(jsonMap);
       return response;
-    };
+    }
+
     final result = _get('/movie/popular', parser, <String, dynamic>{
       'api_key': _apiKey,
       'language': local,
@@ -238,11 +252,12 @@ Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
     String local,
     String query,
   ) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularMoviesResponse.fromJson(jsonMap);
       return response;
-    };
+    }
+
     final result = _get('/search/movie', parser, <String, dynamic>{
       'api_key': _apiKey,
       'language': local,
@@ -254,11 +269,12 @@ Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
   }
 
   Future<MovieDetails> movieDetails(int movieId, String local) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = MovieDetails.fromJson(jsonMap);
       return response;
-    };
+    }
+
     final result = _get('/movie/$movieId', parser, <String, dynamic>{
       'append_to_response': 'credits,videos',
       'api_key': _apiKey,
@@ -268,11 +284,12 @@ Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
   }
 
   Future<bool> isMovieFavorite(int movieId, String sessionId) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final result = jsonMap['favorite'] as bool;
       return result;
-    };
+    }
+
     final result = _get(
       '/movie/$movieId/account_states',
       parser,
@@ -311,11 +328,12 @@ Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
     required String password,
     required String requestToken,
   }) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final token = jsonMap['request_token'] as String;
       return token;
-    };
+    }
+
     final parameters = <String, dynamic>{
       'username': username,
       'password': password,
@@ -331,11 +349,12 @@ Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
   }
 
   Future<String> _makeSession({required String requestToken}) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final sessionId = jsonMap['session_id'] as String;
       return sessionId;
-    };
+    }
+
     final parameters = <String, dynamic>{'request_token': requestToken};
     final result = _post(
       '/authentication/session/new',

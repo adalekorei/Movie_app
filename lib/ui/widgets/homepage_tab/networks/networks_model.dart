@@ -8,19 +8,19 @@ class NetworksModel extends ChangeNotifier {
   final _networks = <NetworksResponse>[];
   List<NetworksResponse> get networks => List.unmodifiable(_networks);
 
-// List of networks is not possible to get from this API, so cycle below is forced action.
-Future<void> loadNetworks() async {
-  _networks.clear();
-  for (var i = 1; i <= 20; i++) {
-    try {
-      final network = await _apiClient.popularNetwork(network_id: i);
-      _networks.add(network);
-    } catch (e) {
-      debugPrint('Network $i not found: $e');
+  // List of networks is not possible to get from this API, so cycle below is forced action.
+  Future<void> loadNetworks() async {
+    _networks.clear();
+    for (var i = 1; i <= 20; i++) {
+      try {
+        final network = await _apiClient.popularNetwork(network_id: i);
+        _networks.add(network);
+      } catch (e) {
+        debugPrint('Network $i not found: $e');
+      }
     }
+    notifyListeners();
   }
-  notifyListeners(); 
-}
 
   void onNetworkTap(BuildContext context, int index) {
     final id = _networks[index].id;

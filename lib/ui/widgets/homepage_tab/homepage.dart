@@ -27,10 +27,16 @@ class _HomepageState extends State<Homepage> {
   void initState() {
     super.initState();
 
-    trendingModel.loadTrendingAll();
-    mostPopularCelebritiesModel.loadCelebrities();
     networksModel.loadNetworks();
-    trailersModel.loadTrailers();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    mostPopularCelebritiesModel.setupPagination(context);
+    trailersModel.setupPagination(context);
+    trendingModel.setupPagination(context);
   }
 
   @override
@@ -63,7 +69,7 @@ class _HomepageState extends State<Homepage> {
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: Text(
-                      'Latest Trailers',
+                      'Upcoming Releases',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -79,7 +85,7 @@ class _HomepageState extends State<Homepage> {
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: Text(
-                      "Most Popular Celebrities",
+                      "Popular Celebrities",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,

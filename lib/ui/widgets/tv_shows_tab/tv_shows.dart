@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:movie_app/domain/api_client/api_client.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 import 'package:movie_app/ui/widgets/tv_shows_tab/searchbar/custom_searchbar.dart';
@@ -24,6 +23,7 @@ class _TvShowsState extends State<TvShows> {
           itemCount: model.tvShows.length,
           itemExtent: 165,
           itemBuilder: (BuildContext context, int index) {
+            model.shownTvShowAtIndex(index);
             final tvShow = model.tvShows[index];
             final posterPath = tvShow.posterPath;
             return Padding(
@@ -53,7 +53,7 @@ class _TvShowsState extends State<TvShows> {
                               ApiClient.imageUrl(posterPath),
                               width: 95,
                             )
-                            : SizedBox.shrink(),
+                            : Image.asset('assets/images/images.png', width: 95, fit: BoxFit.fitWidth, height: 185,),
                         SizedBox(width: 10),
                         Expanded(
                           child: Column(

@@ -30,17 +30,11 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-
-    tvShowModel.loadTvShows();
-  }
-
-  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
     movieListModel.setupLocal(context);
+    tvShowModel.setupPagination(context);
   }
 
   @override

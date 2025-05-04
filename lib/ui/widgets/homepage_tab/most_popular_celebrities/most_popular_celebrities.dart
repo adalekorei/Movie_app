@@ -18,6 +18,7 @@ class MostPopularCelebrities extends StatelessWidget {
           itemExtent: 135,
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
+            model.shownCelebrityAtIndex(index);
             final celebrity = model.results[index];
             final posterPath = celebrity.profilePath;
             return Padding(
@@ -44,7 +45,7 @@ class MostPopularCelebrities extends StatelessWidget {
                                   width: 125,
                                   fit: BoxFit.fitWidth,
                                 )
-                                : Image.asset('assets/images/images.png', width: 125, fit: BoxFit.fitWidth, height: 185,),
+                                : Image.asset('assets/images/images.png', width: 125, fit: BoxFit.fitWidth, height: 185),
                       ),
                       Expanded(
                         child: Padding(

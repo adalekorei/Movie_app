@@ -47,7 +47,7 @@ class MovieList extends StatelessWidget {
                               ApiClient.imageUrl(posterPath),
                               width: 95,
                             )
-                            : const SizedBox.shrink(),
+                            : Image.asset('assets/images/images.png', width: 95, fit: BoxFit.fitWidth, height: 185,),
                         SizedBox(width: 10),
                         Expanded(
                           child: Column(

@@ -20,6 +20,7 @@ class Trending extends StatelessWidget {
               itemExtent: 145,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
+                model.shownTrendingMoviesAndShowsAtIndex(index);
                 final moviesAndTvShows = model.trendingAll[index];
                 final posterPath = moviesAndTvShows.posterPath;
                 return Padding(
