@@ -20,24 +20,24 @@ class MostPopularCelebritiesModel extends ChangeNotifier {
   }
 
   Future<void> _loadCelebrities() async {
-if (_isLoadingInProgress || _currentPage >= _totalPage) return;
+    if (_isLoadingInProgress || _currentPage >= _totalPage) return;
     _isLoadingInProgress = true;
     final nextPage = _currentPage + 1;
 
-try{
-  final resultsResponse = await _apiClient.popularCelebrities(
-      'en-US',
-      time_window: 'week',
-      nextPage
-    );
-    _popularCelebrities.addAll(resultsResponse.results);
-    _currentPage = resultsResponse.page ?? 0;
+    try {
+      final resultsResponse = await _apiClient.popularCelebrities(
+        'en-US',
+        time_window: 'week',
+        nextPage,
+      );
+      _popularCelebrities.addAll(resultsResponse.results);
+      _currentPage = resultsResponse.page ?? 0;
       _totalPage = resultsResponse.totalPages ?? 0;
       _isLoadingInProgress = false;
       notifyListeners();
-}catch(e){
-  _isLoadingInProgress = false;
-}
+    } catch (e) {
+      _isLoadingInProgress = false;
+    }
   }
 
   void onCelebrityTap(BuildContext context, int index) {
@@ -47,7 +47,7 @@ try{
     ).pushNamed(MainNavigationRoutes.celebritiesInfo, arguments: id);
   }
 
-    void shownCelebrityAtIndex(int index) {
+  void shownCelebrityAtIndex(int index) {
     if (index < _popularCelebrities.length - 1) return;
     _loadCelebrities();
   }

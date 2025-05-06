@@ -12,7 +12,9 @@ import 'package:movie_app/ui/widgets/main_screen/main_screen_model.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_details/movie_details.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_details/movie_details_model.dart';
 import 'package:movie_app/ui/widgets/movies_tab/movie_trailer/movie_trailer.dart';
+import 'package:movie_app/ui/widgets/tv_shows_tab/tv_shows_info_model.dart';
 import 'package:movie_app/ui/widgets/tv_shows_tab/tv_shows_info.dart';
+import 'package:movie_app/ui/widgets/tv_shows_tab/tv_shows_info_trailer.dart';
 
 abstract class MainNavigationRoutes {
   static const auth = 'auth';
@@ -25,6 +27,7 @@ abstract class MainNavigationRoutes {
   static const networksInfo = '/networks_info';
   static const tvShowsInfo = '/tv_show_info';
   static const networksKnownForMovies = '/networks_known_for_movies';
+  static const tvShowVideoTrailer = '/tv_shows_info/tv_shows_info_trailer';
 }
 
 class MainNavigation {
@@ -42,7 +45,6 @@ class MainNavigation {
         (context) => const TrendingDescription(),
     MainNavigationRoutes.celebritiesInfo: (context) => const CelebritiesInfo(),
     MainNavigationRoutes.networksInfo: (context) => const NetworksInfo(),
-    MainNavigationRoutes.tvShowsInfo: (context) => const TvShowsInfo(),
     MainNavigationRoutes.networksKnownForMovies:
         (context) => const NetworksKnownForMovies(),
   };
@@ -58,13 +60,30 @@ class MainNavigation {
                 child: const MovieDetails(),
               ),
         );
+      case MainNavigationRoutes.tvShowsInfo:
+        final arguments = settings.arguments;
+        final seriesId = arguments is int ? arguments : 0;
+        return MaterialPageRoute(
+          builder:
+              (context) => NotifierProvider(
+                create: () => TvShowsInfoModel(seriesId),
+                child: const TvShowsInfo(),
+              ),
+        );
+        ;
       case MainNavigationRoutes.movieTrailer:
         final arguments = settings.arguments;
         final youtubeKey = arguments is String ? arguments : 'dQw4w9WgXcQ';
         return MaterialPageRoute(
           builder: (context) => MovieTrailer(youtubeKey: youtubeKey),
         );
-        case MainNavigationRoutes.trailersInfo:
+        case MainNavigationRoutes.tvShowVideoTrailer:
+        final arguments = settings.arguments;
+        final youtubeKey = arguments is String ? arguments : 'dQw4w9WgXcQ';
+        return MaterialPageRoute(
+          builder: (context) => TvShowsInfoTrailer(youtubeKey: youtubeKey),
+        );
+      case MainNavigationRoutes.trailersInfo:
         final arguments = settings.arguments;
         final youtubeKey = arguments is String ? arguments : 'dQw4w9WgXcQ';
         return MaterialPageRoute(

@@ -13,7 +13,7 @@ class Trending extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 235,
+          height: 215,
           child: Scrollbar(
             child: ListView.builder(
               itemCount: model.trendingAll.length,
@@ -83,27 +83,6 @@ class Trending extends StatelessWidget {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 3),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.star_border,
-                                        size: 16,
-                                        color: Colors.black,
-                                      ),
-                                      SizedBox(width: 2),
-                                      Text(
-                                        moviesAndTvShows.voteAverage
-                                            .toStringAsFixed(1),
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ],
                                   ),
                                 ),
                               ],

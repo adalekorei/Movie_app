@@ -7,6 +7,7 @@ import 'package:movie_app/domain/entity/movies/popular_movies_response.dart';
 import 'package:movie_app/domain/entity/networks/networks_response.dart';
 import 'package:movie_app/domain/entity/trailers/trailers.dart';
 import 'package:movie_app/domain/entity/trending/trending_all_response.dart';
+import 'package:movie_app/domain/entity/tv_show/tv_show_details.dart';
 import 'package:movie_app/domain/entity/tv_show/tv_show_response.dart';
 
 enum ApiClientExceptionType { Network, Auth, Other, SessionExpired }
@@ -214,6 +215,24 @@ class ApiClient {
       'api_key': _apiKey,
       'language': local,
       'page': page,
+    });
+    return result;
+  }
+
+  Future<TvShowDetails> tvShowDetails(
+    String local, {
+    required int seriesId,
+  }) async {
+    parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TvShowDetails.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _get('/tv/$seriesId', parser, <String, dynamic>{
+      'api_key': _apiKey,
+      'language': local,
+      'append_to_response': 'credits,videos',
     });
     return result;
   }

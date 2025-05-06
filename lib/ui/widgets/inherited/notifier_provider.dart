@@ -50,8 +50,8 @@ class _NotifierProviderState<Model extends ChangeNotifier>
 
   @override
   void dispose() {
-    if (widget.isModelManaged){
-          _model.dispose();
+    if (widget.isModelManaged) {
+      _model.dispose();
     }
     super.dispose();
   }

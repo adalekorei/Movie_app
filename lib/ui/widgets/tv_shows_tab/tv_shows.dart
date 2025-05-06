@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/domain/api_client/api_client.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
-import 'package:movie_app/ui/widgets/tv_shows_tab/searchbar/custom_searchbar.dart';
+
 import 'package:movie_app/ui/widgets/tv_shows_tab/tv_shows_model.dart';
 
 class TvShows extends StatefulWidget {
@@ -95,7 +95,17 @@ class _TvShowsState extends State<TvShows> {
             );
           },
         ),
-        CustomSearchbar(),
+        Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: TextField(
+        decoration: InputDecoration(
+          labelText: 'Search',
+          filled: true,
+          fillColor: Colors.white.withAlpha(235),
+          border: OutlineInputBorder(),
+        ),
+      ),
+    ),
       ],
     );
   }

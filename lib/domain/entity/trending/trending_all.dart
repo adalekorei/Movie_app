@@ -5,21 +5,21 @@ part 'trending_all.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class TrendingAll {
-  final bool adult;
-  final String backdropPath;
+  final bool? adult;
+  final String? backdropPath;
   final int? id;
   final String? title;
-  final String originalLanguage;
+  final String? originalLanguage;
   final String? originalTitle;
-  final String overview;
-  final String posterPath;
+  final String? overview;
+  final String? posterPath;
   final String? mediaType;
-  final List<int> genreIds;
-  final double popularity;
+  final List<int>? genreIds;
+  final double? popularity;
   final String? releaseDate;
   final bool? video;
-  final double voteAverage;
-  final int voteCount;
+  final double? voteAverage;
+  final int? voteCount;
   final String? originalName;
 
   TrendingAll({
