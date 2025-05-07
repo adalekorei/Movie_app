@@ -40,13 +40,6 @@ class TrendingModel extends ChangeNotifier {
     }
   }
 
-  void onMovieAndTvShowTap(BuildContext context, int index) {
-    final id = trendingAll[index].id;
-    Navigator.of(
-      context,
-    ).pushNamed(MainNavigationRoutes.trendingDescription, arguments: id);
-  }
-
     void shownTrendingMoviesAndShowsAtIndex(int index) {
     if (index < _moviesAndTvShows.length - 1) return;
     _loadTrendingAll();

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/widgets/auth/auth.dart';
 import 'package:movie_app/ui/widgets/auth/auth_model.dart';
-import 'package:movie_app/ui/widgets/homepage_tab/networks/networks_known_for_movies.dart';
-import 'package:movie_app/ui/widgets/homepage_tab/networks/networks_info.dart';
-import 'package:movie_app/ui/widgets/homepage_tab/most_popular_celebrities/celebrities_info.dart';
 import 'package:movie_app/ui/widgets/homepage_tab/trailers/trailers_info.dart';
-import 'package:movie_app/ui/widgets/homepage_tab/trending/trending_description.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
 import 'package:movie_app/ui/widgets/main_screen/main_screen.dart';
 import 'package:movie_app/ui/widgets/main_screen/main_screen_model.dart';
@@ -41,12 +37,6 @@ class MainNavigation {
           create: () => MainScreenModel(),
           child: MainScreen(),
         ),
-    MainNavigationRoutes.trendingDescription:
-        (context) => const TrendingDescription(),
-    MainNavigationRoutes.celebritiesInfo: (context) => const CelebritiesInfo(),
-    MainNavigationRoutes.networksInfo: (context) => const NetworksInfo(),
-    MainNavigationRoutes.networksKnownForMovies:
-        (context) => const NetworksKnownForMovies(),
   };
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
