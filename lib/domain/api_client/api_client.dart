@@ -219,6 +219,22 @@ class ApiClient {
     return result;
   }
 
+    Future<TvShowResponse> searchbarTvShows (String local, int page, String query) async {
+    parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TvShowResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _get('/search/tv', parser, <String, dynamic>{
+      'api_key': _apiKey,
+      'language': local,
+      'page': page,
+      'query': query
+    });
+    return result;
+  }
+
   Future<TvShowDetails> tvShowDetails(
     String local, {
     required int seriesId,
@@ -383,6 +399,8 @@ class ApiClient {
     );
     return result;
   }
+
+  _loadTvShows(String s, int nextPage) {}
 }
 
 void _validateResponse(HttpClientResponse response, dynamic json) {

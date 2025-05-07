@@ -98,6 +98,7 @@ class _TvShowsState extends State<TvShows> {
         Padding(
       padding: const EdgeInsets.all(10.0),
       child: TextField(
+        onChanged: model.searchbarTvShows,
         decoration: InputDecoration(
           labelText: 'Search',
           filled: true,
