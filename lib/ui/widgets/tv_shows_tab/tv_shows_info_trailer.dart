@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class MovieTrailer extends StatefulWidget {
+class TvShowsInfoTrailer extends StatefulWidget {
   final String youtubeKey;
-  const MovieTrailer({super.key, required this.youtubeKey});
+  const TvShowsInfoTrailer({super.key, required this.youtubeKey});
 
   @override
-  State<StatefulWidget> createState() {
-    return _MovieTrailerState();
-  }
+  State<TvShowsInfoTrailer> createState() => _TrailersInfoState();
 }
 
-class _MovieTrailerState extends State<MovieTrailer> {
+class _TrailersInfoState extends State<TvShowsInfoTrailer> {
   late final _controller;
 
   @override
@@ -19,7 +17,7 @@ class _MovieTrailerState extends State<MovieTrailer> {
     super.initState();
     _controller = YoutubePlayerController(
       initialVideoId: widget.youtubeKey,
-      flags: const YoutubePlayerFlags(autoPlay: true, mute: false),
+      flags: const YoutubePlayerFlags(autoPlay: false, mute: false),
     );
   }
 
@@ -34,14 +32,14 @@ class _MovieTrailerState extends State<MovieTrailer> {
       builder: (context, player) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text(
+            centerTitle: true,
+            title: Text(
               'Trailer',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            centerTitle: true,
           ),
           body: Center(child: player),
         );

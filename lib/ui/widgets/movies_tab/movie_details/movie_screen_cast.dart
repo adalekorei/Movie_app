@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/domain/api_client/api_client.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
-import 'package:movie_app/ui/widgets/movie_details/movie_details_model.dart';
+import 'package:movie_app/ui/widgets/movies_tab/movie_details/movie_details_model.dart';
 
 class MovieScreenCast extends StatelessWidget {
   const MovieScreenCast({super.key});
@@ -20,17 +20,7 @@ class MovieScreenCast extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
             ),
           ),
-          SizedBox(height: 270, child: Scrollbar(child: CastList())),
-          Padding(
-            padding: const EdgeInsets.all(2),
-            child: TextButton(
-              onPressed: () {},
-              child: Text(
-                'Full Cast & Crew',
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-          ),
+          SizedBox(height: 280, child: Scrollbar(child: CastList())),
         ],
       ),
     );
@@ -46,7 +36,7 @@ class CastList extends StatelessWidget {
     var cast = model?.movieDetails?.credits.cast;
     if (cast == null || cast.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: 10,
+      itemCount: cast.length < 10 ? cast.length : 10,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
@@ -88,7 +78,7 @@ class CastListItem extends StatelessWidget {
             children: [
               profilePath != null
                   ? Image.network(ApiClient.imageUrl(profilePath))
-                  : const SizedBox.shrink(),
+                  : Image.asset('assets/images/images.png', width: 125, fit: BoxFit.fitWidth, height: 165,),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -107,7 +97,7 @@ class CastListItem extends StatelessWidget {
                       Text(
                         cast.character,
                         style: TextStyle(fontSize: 13),
-                        maxLines: 4,
+                        maxLines: 2,
                       ),
                     ],
                   ),

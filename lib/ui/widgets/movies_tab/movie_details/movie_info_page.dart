@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/domain/api_client/api_client.dart';
-import 'package:movie_app/domain/entity/movie_details_credits.dart';
+import 'package:movie_app/domain/entity/movies/movie_details_credits.dart';
 import 'package:movie_app/ui/navigation/main_navigation.dart';
 import 'package:movie_app/ui/widgets/elements/custom_paint.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
-import 'package:movie_app/ui/widgets/movie_details/movie_details_model.dart';
+import 'package:movie_app/ui/widgets/movies_tab/movie_details/movie_details_model.dart';
 
 class MovieInfoPage extends StatelessWidget {
   const MovieInfoPage({super.key});
@@ -38,7 +38,7 @@ class _TopPoster extends StatelessWidget {
     final posterPath = model?.movieDetails?.posterPath;
 
     return AspectRatio(
-      aspectRatio: 390 / 219,
+      aspectRatio: 390 / 220,
       child: Stack(
         children: [
           backdropPath != null
@@ -204,7 +204,6 @@ class Summary extends StatelessWidget {
       maxLines: 3,
       textAlign: TextAlign.center,
       text.join(' '),
-      // 'R, 09/04/2025, (US) | 1h 58m, Action, Adventure, Thriller',
       style: const TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w400,
@@ -302,3 +301,4 @@ class MediaNamesRowItem extends StatelessWidget {
     );
   }
 }
+

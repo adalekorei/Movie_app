@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/theme/app_colors.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
-import 'package:movie_app/ui/widgets/movie_details/movie_details_model.dart';
-import 'package:movie_app/ui/widgets/movie_details/movie_info_page.dart';
-import 'package:movie_app/ui/widgets/movie_details/movie_screen_cast.dart';
+import 'package:movie_app/ui/widgets/movies_tab/movie_details/movie_details_model.dart';
+import 'package:movie_app/ui/widgets/movies_tab/movie_details/movie_info_page.dart';
+import 'package:movie_app/ui/widgets/movies_tab/movie_details/movie_screen_cast.dart';
 import 'package:movie_app/ui/widgets/my_app/my_app_model.dart';
 
 class MovieDetails extends StatefulWidget {
