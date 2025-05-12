@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/ui/theme/app_colors.dart';
 import 'package:movie_app/ui/widgets/auth/auth_model.dart';
 import 'package:movie_app/ui/widgets/inherited/notifier_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Auth extends StatefulWidget {
   const Auth({super.key});
@@ -20,7 +21,10 @@ class _AuthState extends State<Auth> {
         toolbarHeight: 40,
         backgroundColor: AppColors.mainColor,
         centerTitle: true,
-        title: const Text('Movie App', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        title: const Text(
+          'Movie App',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
       body: ListView(children: [HeaderWidget()]),
     );
@@ -50,7 +54,14 @@ class HeaderWidget extends StatelessWidget {
                 foregroundColor: WidgetStatePropertyAll(AppColors.mainColor),
                 textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 16)),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                final url = Uri.parse('https://www.themoviedb.org/signup');
+                if (await canLaunchUrl(url)) {
+                  await launchUrl(url, mode: LaunchMode.externalApplication);
+                } else {
+                  print('Something happened, please try again');
+                }
+              },
               child: Text('Create an account'),
             ),
             SizedBox(height: 10),
@@ -64,7 +75,16 @@ class HeaderWidget extends StatelessWidget {
                 foregroundColor: WidgetStatePropertyAll(AppColors.mainColor),
                 textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 16)),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                final url = Uri.parse(
+                  'https://accounts.google.com/v3/signin/identifier?flowEntry=ServiceLogin&flowName=GlifWebSignIn&hl=en-GB&ifkv=ASKV5MgZh-cTWEEOPyfl0y2SvE09680-tBL1XvjF8_np7i8eLbY8WYVH0G3d5k-y3dYEsbI4Qzd1TQ&dsh=S-1842874302%3A1747040911297208',
+                );
+                if (await canLaunchUrl(url)) {
+                  await launchUrl(url, mode: LaunchMode.externalApplication);
+                } else {
+                  print('Something happened, please try again');
+                }
+              },
               child: Text('Verify your email'),
             ),
             SizedBox(height: 25),
@@ -121,7 +141,16 @@ class FormWidget extends StatelessWidget {
                 foregroundColor: WidgetStatePropertyAll(Colors.black),
                 textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 16)),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                final url = Uri.parse(
+                  'https://www.themoviedb.org/reset-password',
+                );
+                if (await canLaunchUrl(url)) {
+                  await launchUrl(url, mode: LaunchMode.externalApplication);
+                } else {
+                  print('Something happened, please try again');
+                }
+              },
               child: Text('Reset password'),
             ),
           ],
@@ -152,7 +181,10 @@ class AuthButton extends StatelessWidget {
                 child: CircularProgressIndicator(),
               ),
             )
-            : const Text('Login', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),);
+            : const Text(
+              'Login',
+              style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+            );
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
@@ -170,7 +202,8 @@ class _ErrorMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final errorMessage = NotifierProvider.watch<AuthModel>(context)?.errorMessage;
+    final errorMessage =
+        NotifierProvider.watch<AuthModel>(context)?.errorMessage;
     if (errorMessage == null) return const SizedBox.shrink();
 
     return Padding(
