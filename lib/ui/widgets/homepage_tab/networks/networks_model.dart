@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/domain/api_client/api_client.dart';
 import 'package:movie_app/domain/entity/networks/networks_response.dart';
-import 'package:movie_app/ui/navigation/main_navigation.dart';
 
 class NetworksModel extends ChangeNotifier {
   final _apiClient = ApiClient();
@@ -22,10 +21,4 @@ class NetworksModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onNetworkTap(BuildContext context, int index) {
-    final id = _networks[index].id;
-    Navigator.of(
-      context,
-    ).pushNamed(MainNavigationRoutes.networksInfo, arguments: id);
-  }
 }

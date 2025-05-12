@@ -15,7 +15,7 @@ class Networks extends StatelessWidget {
       child: Scrollbar(
         child: ListView.builder(
           itemCount: model.networks.length,
-          itemExtent: 145,
+          itemExtent: 135,
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
             final networks = model.networks[index];
@@ -29,7 +29,7 @@ class Networks extends StatelessWidget {
                 shadowColor: Colors.black.withValues(alpha: 2),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(10),
-                  onTap: () => model.onNetworkTap(context, index),
+                  onTap: () {},
                   child: ClipRRect(
                     clipBehavior: Clip.hardEdge,
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
@@ -40,7 +40,7 @@ class Networks extends StatelessWidget {
                             ? Center(
                               child: Image.network(
                                 ApiClient.imageUrl(logoPath),
-                                width: 110,
+                                width: 115,
                                 height: 135,
                                 fit: BoxFit.fitWidth,
                               ),
@@ -52,7 +52,7 @@ class Networks extends StatelessWidget {
                               height: 185,
                             ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

@@ -40,13 +40,6 @@ class MostPopularCelebritiesModel extends ChangeNotifier {
     }
   }
 
-  void onCelebrityTap(BuildContext context, int index) {
-    final id = _popularCelebrities[index].id;
-    Navigator.of(
-      context,
-    ).pushNamed(MainNavigationRoutes.celebritiesInfo, arguments: id);
-  }
-
   void shownCelebrityAtIndex(int index) {
     if (index < _popularCelebrities.length - 1) return;
     _loadCelebrities();

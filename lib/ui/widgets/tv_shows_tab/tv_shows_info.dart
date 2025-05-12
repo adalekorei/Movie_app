@@ -101,11 +101,6 @@ class TvShowsItemProfile extends StatelessWidget {
                     ? Image.network(ApiClient.imageUrl(posterPath))
                     : SizedBox.shrink(),
           ),
-          Positioned(
-            top: 5,
-            right: 5,
-            child: Icon(Icons.star_border, color: Colors.white),
-          ),
         ],
       ),
     );

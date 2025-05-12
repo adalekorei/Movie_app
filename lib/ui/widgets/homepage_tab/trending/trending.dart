@@ -13,11 +13,11 @@ class Trending extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 215,
+          height: 235,
           child: Scrollbar(
             child: ListView.builder(
               itemCount: model.trendingAll.length,
-              itemExtent: 145,
+              itemExtent: 135,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 model.shownTrendingMoviesAndShowsAtIndex(index);
@@ -32,7 +32,7 @@ class Trending extends StatelessWidget {
                     shadowColor: Colors.black.withAlpha(180),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(10),
-                      onTap: () => model.onMovieAndTvShowTap(context, index),
+                      onTap: () {},
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
                         child: Column(
@@ -73,8 +73,8 @@ class Trending extends StatelessWidget {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                    left: 5,
-                                    top: 5,
+                                    left: 8,
+                                    top: 15,
                                   ),
                                   child: Text(
                                     moviesAndTvShows.movieAndTvShowTitle,

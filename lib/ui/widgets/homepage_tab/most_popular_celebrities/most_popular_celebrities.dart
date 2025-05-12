@@ -30,7 +30,7 @@ class MostPopularCelebrities extends StatelessWidget {
                 shadowColor: Colors.black.withValues(alpha: 2),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(12),
-                  onTap: () => model.onCelebrityTap(context, index),
+                  onTap: () {},
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
