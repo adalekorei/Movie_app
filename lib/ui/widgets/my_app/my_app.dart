@@ -6,7 +6,6 @@ import 'package:movie_app/ui/widgets/my_app/my_app_model.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MyApp extends StatelessWidget {
-  // final MyAppModel model;
   static final mainNavigation = MainNavigation();
   const MyApp({super.key});
 
@@ -14,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = Provider.read<MyAppModel>(context);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           backgroundColor: AppColors.mainColor,
